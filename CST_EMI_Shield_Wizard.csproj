@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CSTInterAction.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="CST_DESIGN_ENVIRONMENT_AMD64Lib">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>0</VersionMinor>

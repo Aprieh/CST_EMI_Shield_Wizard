@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CST_EMI_Shield_Wizard"
         mc:Ignorable="d"
-        Title="Барашек" Height="700" Width="900">
+        Title="ПАИМЭК" Height="700" Width="900">
 
     <DockPanel x:Name="MainDockPanel">
         <Menu x:Name="Menu" DockPanel.Dock="Top">
@@ -269,7 +269,7 @@
                                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5" IsReadOnly="True"/>
 
                                 <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click"/>
-                                <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" />
+                                <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" Click="CompareWithAbcent_Click" />
 
 
                             </Grid>

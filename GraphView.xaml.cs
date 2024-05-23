@@ -6,10 +6,10 @@ using System.Windows;
 using OxyPlot.Annotations;
 using System.Collections.Generic;
 using System.IO;
+using System.Globalization;
 
 namespace CST_EMI_Shield_Wizard
 {
-
     public class DataParser
     {
         public string Title { get; private set; }
@@ -48,8 +48,8 @@ namespace CST_EMI_Shield_Wizard
                     var values = line.Split('\t');
                     if (values.Length == 2)
                     {
-                        if (double.TryParse(values[0].Replace(',', '.'), out double x) &&
-                            double.TryParse(values[1].Replace(',', '.'), out double y))
+                        if (double.TryParse(values[0].Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double x) &&
+                            double.TryParse(values[1].Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double y))
                         {
                             DataPoints.Add(new DataPoint(x, y));
                         }
@@ -57,7 +57,6 @@ namespace CST_EMI_Shield_Wizard
                 }
             }
         }
-
     }
 
     public partial class GraphView : Window

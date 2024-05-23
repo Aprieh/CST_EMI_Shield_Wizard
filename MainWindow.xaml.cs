@@ -270,7 +270,10 @@ namespace CST_EMI_Shield_Wizard
             return plotModel;
         }
 
-        
+        private void CompareWithAbcent_Click(object sender, RoutedEventArgs e)
+        {
+            ShieldEfficacyWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+        }
     }
     public class LayerData
     {
