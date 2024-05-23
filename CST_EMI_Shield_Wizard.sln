@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34607.119
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CST_EMI_Shield_Wizard", "CST_EMI_Shield_Wizard.csproj", "{939F1583-ACF4-40AB-933C-72F4E4C40F4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{939F1583-ACF4-40AB-933C-72F4E4C40F4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939F1583-ACF4-40AB-933C-72F4E4C40F4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939F1583-ACF4-40AB-933C-72F4E4C40F4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939F1583-ACF4-40AB-933C-72F4E4C40F4F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A706162C-E98F-40DB-8FF4-1574D7A6CD05}
+	EndGlobalSection
+EndGlobal
