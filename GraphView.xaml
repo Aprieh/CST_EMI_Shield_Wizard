@@ -8,6 +8,5 @@
         Title="GraphView" Height="450" Width="800">
     <Grid>
         <oxy:PlotView Model="{Binding PlotModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-        <Button Content="Move to Max" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Click="MoveToMax_Click"/>
     </Grid>
 </Window>

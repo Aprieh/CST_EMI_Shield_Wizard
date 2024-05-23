@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CST_EMI_Shield_Wizard"
         mc:Ignorable="d"
-        Title="ПАИМЭК" Height="700" Width="900">
+        Title="ПАИМЭК" Height="676" Width="900">
 
     <DockPanel x:Name="MainDockPanel">
         <Menu x:Name="Menu" DockPanel.Dock="Top">
@@ -22,7 +22,7 @@
             </MenuItem>
             <MenuItem Header="CSTStudioSuite">
                 <MenuItem Header="Запуск CST" Click="CSTLaunch_Click"/>
-                <MenuItem x:Name="CalculateEMIImpact"  Header="Отрисовать Чертеж" Click="CalculateEMIImpact_Click"/>
+                <MenuItem x:Name="CalculateEMIImpact"  Header="Начать симуляцию" Click="CalculateEMIImpact_Click"/>
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="Помощь" Click="HelpMenuItem_Click"/>
@@ -101,9 +101,9 @@
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -155,6 +155,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
@@ -164,24 +165,28 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="1" Content="X" Margin="5"/>
-                                <Label Grid.Row="0" Grid.Column="2" Content="Y" Margin="5"/>
-                                <Label Grid.Row="0" Grid.Column="3" Content="Z" Margin="5"/>
+                                <Label Grid.Row="0" Grid.Column="1" Content="X" Margin="5,5,5,5"/>
+                                <Label Grid.Row="0" Grid.Column="2" Content="Y" Margin="5,5,5,5"/>
+                                <Label Grid.Row="0" Grid.Column="3" Content="Z" Margin="5,5,5,5"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Нормаль распространения по X Y Z:" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="xNormalTextBox" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="2" x:Name="yNormalTextBox" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="3" x:Name="zNormalTextBox" Margin="5"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="Нормаль распространения по X Y Z:" Margin="5,5,5,5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="xNormalTextBox" Margin="5,5,5,5"/>
+                                <TextBox Grid.Row="1" Grid.Column="2" x:Name="yNormalTextBox" Margin="5,5,5,5"/>
+                                <TextBox Grid.Row="1" Grid.Column="3" x:Name="zNormalTextBox" Margin="5,5,5,5"/>
 
-                                <Label Grid.Row="2" Grid.Column="1" Content="X" Margin="5"/>
-                                <Label Grid.Row="2" Grid.Column="2" Content="Y" Margin="5"/>
-                                <Label Grid.Row="2" Grid.Column="3" Content="Z" Margin="5"/>
+                                <Label Grid.Row="2" Grid.Column="1" Content="X" Margin="5,5,5,5"/>
+                                <Label Grid.Row="2" Grid.Column="2" Content="Y" Margin="5,5,5,5"/>
+                                <Label Grid.Row="2" Grid.Column="3" Content="Z" Margin="5,5,5,5"/>
 
-                                <Label Grid.Row="3" Grid.Column="0" Content="Вектор электрического поля по X Y Z:" Margin="5"/>
-                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="xElectricFieldTextBox" Margin="5"/>
-                                <TextBox Grid.Row="3" Grid.Column="2" x:Name="yElectricFieldTextBox" Margin="5"/>
-                                <TextBox Grid.Row="3" Grid.Column="3" x:Name="zElectricFieldTextBox" Margin="5"/>
-                                <Label Grid.Row="3" Grid.Column="4" Content="В/м" Margin="5"/>
+                                <Label Grid.Row="3" Grid.Column="0" Content="Вектор электрического поля по X Y Z:" Margin="5,5,5,5" />
+                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="xElectricFieldTextBox" Margin="5,5,5,5" />
+                                <TextBox Grid.Row="3" Grid.Column="2" x:Name="yElectricFieldTextBox" Margin="5,5,5,5" />
+                                <TextBox Grid.Row="3" Grid.Column="3" x:Name="zElectricFieldTextBox" Margin="5,5,5,5" />
+                                <Label Grid.Row="3" Grid.Column="4" Content="В/м" Margin="5,5,5,5"/>
+                                
+                                <Label Grid.Row="4" Grid.Column="0" Content="Частота плоской волны:" Margin="5,5,5,5" />
+                                <TextBox Grid.Row="4" Grid.Column="1" x:Name="WaveFreqTextBox" Margin="5,5,5,5" Grid.ColumnSpan="2"/>
+                                <Label Grid.Row="4" Grid.Column="3" Content="МГц" Margin="5,5,5,5" />
                             </Grid>
                         </GroupBox>
 
@@ -258,15 +263,15 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopAmplitudeTextBox" Margin="5" IsReadOnly="True"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopAmplitudeTextBox" Margin="5"  />
                                 <Label Grid.Row="0" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopHTextBox" Margin="5" IsReadOnly="True"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopHTextBox" Margin="5"  />
                                 <Label Grid.Row="1" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5" IsReadOnly="True"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5"  />
 
                                 <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click"/>
                                 <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" Click="CompareWithAbcent_Click" />
@@ -294,15 +299,15 @@
 
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5" IsReadOnly="True"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5"  />
                                 <Label Grid.Row="1" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5" IsReadOnly="True"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5"  />
                                 <Label Grid.Row="2" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5" IsReadOnly="True"/>
+                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5"  />
 
                                 <Button Grid.Row="4" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheLoaded" Margin="5" Click="ShowGraphOfTheLoaded_Click"/>
                                 <Button Grid.Row="5" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithCalculated" Margin="5"/>
@@ -321,19 +326,31 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Content="S (без экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
-                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyWithoutTextBox" Margin="0,5" IsReadOnly="True"/>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Label Content="S(H) (без экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyHWithoutTextBox" Margin="0,5"  />
+                                        <Label Content="S(E) (без экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5" Grid.Row="1"/>
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyEWithoutTextBox" Margin="0,5"   Grid.Row="1"/>
                                     </Grid>
                                 </GroupBox>
                                 <GroupBox Header ="С другим экраном" Grid.Column="1">
-                                    
+
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Label Content="S (другой экран) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
-                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyAnotherTextBox" Margin="0,5" IsReadOnly="True"/>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Label Content="S(H) (другой экран) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyHAnotherTextBox" Margin="0,5"  />
+                                        <Label Content="S(E) (другой экран) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5" Grid.Row="1"/>
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyEAnotherTextBox" Margin="0,5"   Grid.Row="1"/>
                                     </Grid>
                                 </GroupBox>
                             </Grid>

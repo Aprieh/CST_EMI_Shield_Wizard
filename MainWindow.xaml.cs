@@ -272,7 +272,8 @@ namespace CST_EMI_Shield_Wizard
 
         private void CompareWithAbcent_Click(object sender, RoutedEventArgs e)
         {
-            ShieldEfficacyWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+            ShieldEfficacyHWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+            ShieldEfficacyEWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
         }
     }
     public class LayerData
