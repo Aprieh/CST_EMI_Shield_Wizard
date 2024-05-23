@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.ObjectModel;
+using System.Windows;
 using System.Windows.Controls;
 
 
@@ -17,6 +18,8 @@ namespace CST_EMI_Shield_Wizard
             InitializeComponent();
             PopulateMaterialComboBox();
             InitializeLayerDataGrid();
+
+            InitSimulation.Click += CalculateEMIImpact_Click;
         }
 
         private void PopulateMaterialComboBox()
@@ -29,7 +32,7 @@ namespace CST_EMI_Shield_Wizard
 
         private void InitializeLayerDataGrid()
         {
-            layerDataGrid.ItemsSource = new List<LayerData>();
+            layerDataGrid.ItemsSource = new ObservableCollection<LayerData>();
         }
 
         private void AddLayerButton_Click(object sender, RoutedEventArgs e)
@@ -44,7 +47,7 @@ namespace CST_EMI_Shield_Wizard
             double maxY = Convert.ToDouble(yMaxTextBox.Text);
             double maxZ = Convert.ToDouble(zMaxTextBox.Text);
 
-            var layers = layerDataGrid.ItemsSource as List<LayerData>;
+            var layers = layerDataGrid.ItemsSource as ObservableCollection<LayerData>;
             layers.Add(new LayerData
             {
                 LayerName = layerName,
@@ -52,21 +55,23 @@ namespace CST_EMI_Shield_Wizard
                 MinCoordinates = $"[{minX}, {minY}, {minZ}]",
                 MaxCoordinates = $"[{maxX}, {maxY}, {maxZ}]"
             });
-            layerDataGrid.Items.Refresh();
         }
 
         private void DeleteSelectedLayerButton_Click(object sender, RoutedEventArgs e)
         {
             if (layerDataGrid.SelectedItem != null)
             {
-                var layers = layerDataGrid.ItemsSource as List<LayerData>;
+                var layers = layerDataGrid.ItemsSource as ObservableCollection<LayerData>;
                 layers.Remove(layerDataGrid.SelectedItem as LayerData);
-                layerDataGrid.Items.Refresh();
             }
             else
             {
                 MessageBox.Show("No row selected for deletion", "Delete Error", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+        private void LayerDataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
         }
         private void HelpMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -133,6 +138,8 @@ namespace CST_EMI_Shield_Wizard
                 MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        
     }
     public class LayerData
     {

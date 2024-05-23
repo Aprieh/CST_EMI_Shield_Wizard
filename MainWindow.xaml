@@ -69,7 +69,7 @@
                         <Label Grid.Row="3" Grid.Column="2" Content="Y min" Margin="5"/>
                         <Label Grid.Row="3" Grid.Column="3" Content="Z min" Margin="5"/>
 
-                        <TextBox Grid.Row="4" Grid.Column="1" x:Name="xMinTextBox" Margin="5" TextChanged="xMinTextBox_TextChanged"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" x:Name="xMinTextBox" Margin="5" />
                         <TextBox Grid.Row="4" Grid.Column="2" x:Name="yMinTextBox" Margin="5"/>
                         <TextBox Grid.Row="4" Grid.Column="3" x:Name="zMinTextBox" Margin="5"/>
 
@@ -85,9 +85,9 @@
 
                         <Label Grid.Row="6" Grid.Column="0" Content="Конечная точка:" Margin="5"/>
 
-                        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" x:Name="layerDataGrid" Margin="5" AutoGenerateColumns="False">
+                        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" x:Name="layerDataGrid" Margin="5" AutoGenerateColumns="False" LoadingRow="LayerDataGrid_LoadingRow">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Layer x:Name" Binding="{Binding LayerName}" Width="*"/>
+                                <DataGridTextColumn Header="Layer Name" Binding="{Binding LayerName}" Width="*"/>
                                 <DataGridTextColumn Header="Material" Binding="{Binding Material}" Width="*"/>
                                 <DataGridTextColumn Header="Min Coordinates" Binding="{Binding MinCoordinates}" Width="*"/>
                                 <DataGridTextColumn Header="Max Coordinates" Binding="{Binding MaxCoordinates}" Width="*"/>
@@ -98,10 +98,216 @@
                 </TabItem>
 
                 <TabItem x:Name="ImpactTab" Header="Воздействие">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
+                        <Label Grid.Row="0" Grid.Column="0" Content="Название воздействия" Margin="5"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="impactNameTextBox" Margin="5"/>
+
+                        <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Граничные условия">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Content="X min"/>
+                                <ComboBox Grid.Row="1" Grid.Column="0" x:Name="xMinBndComboBox"/>
+
+                                <Label Grid.Row="0" Grid.Column="1" Content="Y min"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="yMinBndComboBox"/>
+
+                                <Label Grid.Row="0" Grid.Column="2" Content="Z min"/>
+                                <ComboBox Grid.Row="1" Grid.Column="2" x:Name="zMinBndComboBox"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="X max"/>
+                                <ComboBox Grid.Row="3" Grid.Column="0" x:Name="xMaxBndComboBox"/>
+
+                                <Label Grid.Row="2" Grid.Column="1" Content="Y max"/>
+                                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="yMaxBndComboBox"/>
+
+                                <Label Grid.Row="2" Grid.Column="2" Content="Z max"/>
+                                <ComboBox Grid.Row="3" Grid.Column="2" x:Name="zMaxBndComboBox"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Header="Настройки распространения и электрического поля">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="1" Content="X" Margin="5"/>
+                                <Label Grid.Row="0" Grid.Column="2" Content="Y" Margin="5"/>
+                                <Label Grid.Row="0" Grid.Column="3" Content="Z" Margin="5"/>
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Нормаль распространения по X Y Z:" Margin="5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="xNormalTextBox" Margin="5"/>
+                                <TextBox Grid.Row="1" Grid.Column="2" x:Name="yNormalTextBox" Margin="5"/>
+                                <TextBox Grid.Row="1" Grid.Column="3" x:Name="zNormalTextBox" Margin="5"/>
+
+                                <Label Grid.Row="2" Grid.Column="1" Content="X" Margin="5"/>
+                                <Label Grid.Row="2" Grid.Column="2" Content="Y" Margin="5"/>
+                                <Label Grid.Row="2" Grid.Column="3" Content="Z" Margin="5"/>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="Вектор электрического поля по X Y Z:" Margin="5"/>
+                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="xElectricFieldTextBox" Margin="5"/>
+                                <TextBox Grid.Row="3" Grid.Column="2" x:Name="yElectricFieldTextBox" Margin="5"/>
+                                <TextBox Grid.Row="3" Grid.Column="3" x:Name="zElectricFieldTextBox" Margin="5"/>
+                                <Label Grid.Row="3" Grid.Column="4" Content="В/м" Margin="5"/>
+                            </Grid>
+                        </GroupBox>
+
+                        <GroupBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Header="Датчик H и E поля">
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <GroupBox Grid.Row="0" Grid.Column="0" Header="Ориентация">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <RadioButton x:Name="OrientationXRadioButton"  Content="X" Grid.Row="0" Margin="5"/>
+                                        <RadioButton x:Name="OrientationYRadioButton" Content="Y" Grid.Row="1" Margin="5"/>
+                                        <RadioButton x:Name="OrientationZRadioButton" Content="Z" Grid.Row="2" Margin="5"/>
+                                        <RadioButton x:Name="OrientationABSRadioButton" Content="All (X, Y, Z, abs)" Grid.Row="3" Margin="5"/>
+                                    </Grid>
+                                </GroupBox>
+
+                                <GroupBox Grid.Row="0" Grid.Column="1" Header="Позиция">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Content="X:" Margin="5"/>
+                                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="probeXPosTextBox" Margin="5"/>
+
+                                        <Label Grid.Row="1" Grid.Column="0" Content="Y:" Margin="5"/>
+                                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="probeYPosTextBox" Margin="5"/>
+
+                                        <Label Grid.Row="2" Grid.Column="0" Content="Z:" Margin="5"/>
+                                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="probeZPosTextBox" Margin="5"/>
+                                    </Grid>
+                                </GroupBox>
+                            </Grid>
+                        </GroupBox>
+
+                        <Button Grid.Row="4" Grid.Column="1" Content="Запустить расчет" x:Name="InitSimulation" Margin="10"/>
+                    </Grid>
                 </TabItem>
                 <TabItem x:Name="ResultsTab" Header="Результаты">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <GroupBox Header="Полученный экран">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopAmplitudeTextBox" Margin="5"/>
+                                <Label Grid.Row="0" Grid.Column="2" Content="А/м" Margin="5"/>
 
+                                <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopHTextBox" Margin="5"/>
+                                <Label Grid.Row="1" Grid.Column="2" Content="В/м" Margin="5"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5"/>
+
+                                <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5"/>
+                                <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5"/>
+                                
+                                
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Header="Сравнить с существующим" Grid.Row="1">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Button Grid.Row="0" Grid.Column="1" Content="Загрузить Экран" x:Name="LoadShield" Margin="5"/>
+
+
+                                <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5"/>
+                                <Label Grid.Row="1" Grid.Column="2" Content="А/м" Margin="5"/>
+
+                                <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5"/>
+                                <Label Grid.Row="2" Grid.Column="2" Content="В/м" Margin="5"/>
+
+                                <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
+                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5"/>
+
+                                <Button Grid.Row="4" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheLoaded" Margin="5"/>
+                                <Button Grid.Row="5" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithCalculated" Margin="5"/>
+                            </Grid>
+                        </GroupBox>
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>
