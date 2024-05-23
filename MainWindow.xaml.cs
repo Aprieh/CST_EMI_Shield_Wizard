@@ -1,13 +1,72 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 
 namespace CST_EMI_Shield_Wizard
 {
     public partial class MainWindow : Window
     {
+        private CSTController cstController = new();
+        private List<string> materials = new List<string> {
+            "Alumina (96%) (lossy)", "Alumina (96%) (loss free)",
+            "Copper (pure)", "Polycarbonate (lossy)", "Polyimide (lossy)",
+            "Polyimide (loss free)", "Zinc", "Aluminum"
+        };
         public MainWindow()
         {
             InitializeComponent();
+            PopulateMaterialComboBox();
+            InitializeLayerDataGrid();
+        }
+
+        private void PopulateMaterialComboBox()
+        {
+            foreach (var material in materials)
+            {
+                materialComboBox.Items.Add(material);
+            }
+        }
+
+        private void InitializeLayerDataGrid()
+        {
+            layerDataGrid.ItemsSource = new List<LayerData>();
+        }
+
+        private void AddLayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            string layerName = layerNameTextBox.Text;
+            string material = materialComboBox.SelectedItem as string;
+
+            double minX = Convert.ToDouble(xMinTextBox.Text);
+            double minY = Convert.ToDouble(yMinTextBox.Text);
+            double minZ = Convert.ToDouble(zMinTextBox.Text);
+            double maxX = Convert.ToDouble(xMaxTextBox.Text);
+            double maxY = Convert.ToDouble(yMaxTextBox.Text);
+            double maxZ = Convert.ToDouble(zMaxTextBox.Text);
+
+            var layers = layerDataGrid.ItemsSource as List<LayerData>;
+            layers.Add(new LayerData
+            {
+                LayerName = layerName,
+                Material = material,
+                MinCoordinates = $"[{minX}, {minY}, {minZ}]",
+                MaxCoordinates = $"[{maxX}, {maxY}, {maxZ}]"
+            });
+            layerDataGrid.Items.Refresh();
+        }
+
+        private void DeleteSelectedLayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (layerDataGrid.SelectedItem != null)
+            {
+                var layers = layerDataGrid.ItemsSource as List<LayerData>;
+                layers.Remove(layerDataGrid.SelectedItem as LayerData);
+                layerDataGrid.Items.Refresh();
+            }
+            else
+            {
+                MessageBox.Show("No row selected for deletion", "Delete Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private void HelpMenuItem_Click(object sender, RoutedEventArgs e)
         {
@@ -54,6 +113,32 @@ namespace CST_EMI_Shield_Wizard
         {
             WindowState = WindowState.Minimized;
         }
+        private void CSTLaunch_Click(object sender, RoutedEventArgs e)
+        {
+            LaunchCST();
+        }
+        //доработать
+        private void CalculateEMIImpact_Click(object sender, RoutedEventArgs e)
+        {
+            LaunchCST();
+        }
+        private void LaunchCST()
+        {
+            try
+            {
+                cstController.LaunchCST();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
-
+    public class LayerData
+    {
+        public string LayerName { get; set; }
+        public string Material { get; set; }
+        public string MinCoordinates { get; set; }
+        public string MaxCoordinates { get; set; }
+    }
 }

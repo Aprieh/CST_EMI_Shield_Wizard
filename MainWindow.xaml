@@ -21,8 +21,8 @@
                 <MenuItem Header="Свернуть" Click="Minimize_Click"/>
             </MenuItem>
             <MenuItem Header="CSTStudioSuite">
-                <!--<MenuItem Header="Запуск CST" Click="CSTLaunch_Click"/>
-                <MenuItem x:Name="CalculateEMIImpact"  Header="Отрисовать Чертеж" Click="CalculateEMIImpact_Click"/>-->
+                <MenuItem Header="Запуск CST" Click="CSTLaunch_Click"/>
+                <MenuItem x:Name="CalculateEMIImpact"  Header="Отрисовать Чертеж" Click="CalculateEMIImpact_Click"/>
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="Помощь" Click="HelpMenuItem_Click"/>
@@ -38,13 +38,70 @@
         <Grid x:Name="GridForPanels" >
             <TabControl x:Name="InterfaceTabs">
                 <TabItem x:Name="ShieldTab" Header="Экран">
-                    
+                    <Grid Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Row="8" Grid.Column="0" Content="Добавить слой" Margin="5,5,5,5" Click="AddLayerButton_Click"/>
+
+                        <Label Grid.Row="1" Grid.Column="0" Content="Название слоя:" Margin="5"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" x:Name="layerNameTextBox" Margin="5"/>
+
+                        <Label Grid.Row="2" Grid.Column="0" Content="Материал:" Margin="5"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" x:Name="materialComboBox" Margin="5"/>
+
+                        <Label Grid.Row="3" Grid.Column="1" Content="X min" Margin="5"/>
+                        <Label Grid.Row="3" Grid.Column="2" Content="Y min" Margin="5"/>
+                        <Label Grid.Row="3" Grid.Column="3" Content="Z min" Margin="5"/>
+
+                        <TextBox Grid.Row="4" Grid.Column="1" x:Name="xMinTextBox" Margin="5" TextChanged="xMinTextBox_TextChanged"/>
+                        <TextBox Grid.Row="4" Grid.Column="2" x:Name="yMinTextBox" Margin="5"/>
+                        <TextBox Grid.Row="4" Grid.Column="3" x:Name="zMinTextBox" Margin="5"/>
+
+                        <Label Grid.Row="4" Grid.Column="0" Content="Начальная точка:" Margin="5"/>
+
+                        <Label Grid.Row="5" Grid.Column="1" Content="X max" Margin="5"/>
+                        <Label Grid.Row="5" Grid.Column="2" Content="Y max" Margin="5"/>
+                        <Label Grid.Row="5" Grid.Column="3" Content="Z max" Margin="5"/>
+
+                        <TextBox Grid.Row="6" Grid.Column="1" x:Name="xMaxTextBox" Margin="5"/>
+                        <TextBox Grid.Row="6" Grid.Column="2" x:Name="yMaxTextBox" Margin="5"/>
+                        <TextBox Grid.Row="6" Grid.Column="3" x:Name="zMaxTextBox" Margin="5"/>
+
+                        <Label Grid.Row="6" Grid.Column="0" Content="Конечная точка:" Margin="5"/>
+
+                        <DataGrid Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" x:Name="layerDataGrid" Margin="5" AutoGenerateColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Layer x:Name" Binding="{Binding LayerName}" Width="*"/>
+                                <DataGridTextColumn Header="Material" Binding="{Binding Material}" Width="*"/>
+                                <DataGridTextColumn Header="Min Coordinates" Binding="{Binding MinCoordinates}" Width="*"/>
+                                <DataGridTextColumn Header="Max Coordinates" Binding="{Binding MaxCoordinates}" Width="*"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Grid.Row="8" Grid.Column="3" Content="Удалить слой" Margin="5,5,5,5" Click="DeleteSelectedLayerButton_Click"/>
+                    </Grid>
                 </TabItem>
+
                 <TabItem x:Name="ImpactTab" Header="Воздействие">
-                    
+
                 </TabItem>
                 <TabItem x:Name="ResultsTab" Header="Результаты">
-                    
+
                 </TabItem>
             </TabControl>
         </Grid>
