@@ -233,7 +233,7 @@
                             </Grid>
                         </GroupBox>
 
-                        <Button Grid.Row="4" Grid.Column="1" Content="Запустить расчет" x:Name="InitSimulation" Margin="10"/>
+                        <Button Grid.Row="4" Grid.Column="1" Content="Запустить расчет" x:Name="InitSimulation" Margin="10" Click="InitSimulation_Click" />
                     </Grid>
                 </TabItem>
                 <TabItem x:Name="ResultsTab" Header="Результаты">
@@ -269,7 +269,7 @@
                                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5" IsReadOnly="True"/>
 
                                 <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click"/>
-                                <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5"/>
+                                <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" />
 
 
                             </Grid>

@@ -3,16 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CST_EMI_Shield_Wizard"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
         Title="GraphView" Height="450" Width="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <oxy:PlotView x:Name="plotView" Model="{Binding PlotModel}" Grid.Row="0" />
-        <Button Content="Переместить ползунок на максимум" Click="MoveSliderToMaxValue" Grid.Row="1" HorizontalAlignment="Center" Margin="5"/>
+        <oxy:PlotView Model="{Binding PlotModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Button Content="Move to Max" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10" Click="MoveToMax_Click"/>
     </Grid>
 </Window>

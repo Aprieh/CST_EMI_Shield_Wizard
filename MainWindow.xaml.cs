@@ -19,6 +19,7 @@ namespace CST_EMI_Shield_Wizard
         private List<string> spaceSettings = new List<string> {
             "Open", "Open (add space)"
         };
+        private Random random = new Random();
         public MainWindow()
         {
             InitializeComponent();
@@ -29,6 +30,23 @@ namespace CST_EMI_Shield_Wizard
             InitializeValidation();
 
             InitSimulation.Click += CalculateEMIImpact_Click;
+        }
+
+        private void InitSimulation_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateTextBoxesWithRandomValues();
+        }
+
+        private void UpdateTextBoxesWithRandomValues()
+        {
+            TopAmplitudeTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+            TopHTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+            TopETextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+        }
+
+        private double GenerateRandomValue(double min, double max)
+        {
+            return random.NextDouble() * (max - min) + min;
         }
 
         private void PopulateMaterialComboBox()
@@ -198,19 +216,19 @@ namespace CST_EMI_Shield_Wizard
 
         private void ShowGraphOfTheCalculated_Click(object sender, RoutedEventArgs e)
         {
-            var graphView = new GraphView
-            {
-                PlotModel = CreateCalculatedGraph()
-            };
+            var graphView = new GraphView();
+            var parser = new DataParser();
+            parser.Parse(@"C:\Files\AdvancedShield.txt");
+            graphView.UpdateGraph(parser.Title, parser.XLabel, parser.YLabel, parser.DataPoints);
             graphView.Show();
         }
 
         private void ShowGraphOfTheLoaded_Click(object sender, RoutedEventArgs e)
         {
-            var graphView = new GraphView
-            {
-                PlotModel = CreateLoadedGraph()
-            };
+            var graphView = new GraphView();
+            var parser = new DataParser();
+            parser.Parse(@"C:\Files\SimpleShield.txt");
+            graphView.UpdateGraph(parser.Title, parser.XLabel, parser.YLabel, parser.DataPoints);
             graphView.Show();
         }
 
@@ -251,6 +269,8 @@ namespace CST_EMI_Shield_Wizard
             plotModel.Series.Add(lineSeries);
             return plotModel;
         }
+
+        
     }
     public class LayerData
     {
