@@ -5,8 +5,111 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CST_EMI_Shield_Wizard"
         mc:Ignorable="d"
-        Title="HelpWindow" Height="450" Width="800">
+        Title="Помощь" Height="569" Width="505">
     <Grid>
-        
+        <RichTextBox IsReadOnly="True">
+            <FlowDocument>
+                <Paragraph FontSize="14" FontWeight="Bold">Помощь</Paragraph>
+                <Paragraph FontWeight="Bold">Система автоматизации исследования многослойного электромагнитного экрана</Paragraph>
+                <Paragraph>Добро пожаловать в систему автоматизации исследования многослойного электромагнитного экрана! Этот раздел поможет вам разобраться с основными функциями программы и научиться эффективно использовать все её возможности.</Paragraph>
+                <Paragraph FontWeight="Bold">Основные функции:</Paragraph>
+                <List MarkerStyle="Decimal">
+                    <ListItem>
+                        <Paragraph FontWeight="Bold">Создание нового проекта:</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>Нажмите на кнопку "Создать проект" в главном меню.</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Введите имя проекта и выберите путь для сохранения.</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Нажмите "Создать", чтобы создать новый проект и сохранить его в указанном месте.</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph FontWeight="Bold">Моделирование экрана:</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>Введите параметры многослойного экрана и электромагнитного воздействия.</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Параметры могут включать типы материалов, их толщину, электропроводность, магнитную проницаемость и другие характеристики.</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph FontWeight="Bold">Запуск моделирования:</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>После ввода параметров нажмите кнопку "Запустить моделирование".</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Программа передаст параметры в CST Studio Suite для проведения моделирования.</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph FontWeight="Bold">Анализ результатов:</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>Программа автоматически соберет результаты моделирования.</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Вы сможете просмотреть результаты, включая эффективность экранирования и коэффициенты экранирования.</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph FontWeight="Bold">Сравнение экранов:</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>Вы можете сравнивать результаты моделирования разных экранов.</Paragraph>
+                            </ListItem>
+                            <ListItem>
+                                <Paragraph>Выберите экраны для сравнения и нажмите кнопку "Сравнить".</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                </List>
+                <Paragraph FontWeight="Bold">Подсказки:</Paragraph>
+                <List MarkerStyle="Disc">
+                    <ListItem>
+                        <Paragraph>Для получения наилучших результатов, убедитесь, что все параметры введены корректно.</Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>Используйте справочную документацию и технические задания для точного ввода параметров.</Paragraph>
+                    </ListItem>
+                </List>
+                <Paragraph FontWeight="Bold">Часто задаваемые вопросы:</Paragraph>
+                <List MarkerStyle="Decimal">
+                    <ListItem>
+                        <Paragraph FontWeight="Bold">Как изменить параметры экрана?</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>Вы можете изменить параметры экрана в соответствующих полях ввода перед запуском моделирования.</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph FontWeight="Bold">Как сохранить результаты моделирования?</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>Результаты моделирования автоматически сохраняются в проекте. Вы можете экспортировать их в виде отчета.</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph FontWeight="Bold">Что делать, если программа не запускается?</Paragraph>
+                        <List MarkerStyle="Disc">
+                            <ListItem>
+                                <Paragraph>Проверьте корректность установки CST Studio Suite и наличие необходимых лицензий. Если проблема сохраняется, обратитесь в службу поддержки.</Paragraph>
+                            </ListItem>
+                        </List>
+                    </ListItem>
+                </List>
+            </FlowDocument>
+        </RichTextBox>
     </Grid>
 </Window>

@@ -11,9 +11,9 @@
         <Menu x:Name="Menu" DockPanel.Dock="Top">
             <MenuItem Header="Файл">
                 <MenuItem Header="Создать" Click="CreateProject_Click"/>
-                <MenuItem Header="Открыть" Click="OpenProject_Click"/>
-                <MenuItem x:Name="SaveMenuItem" Header="Сохранить" Click="SaveCurrentProject_Click"/>
-                <MenuItem Header="Выход" Click="Exit_Click"/>
+                <MenuItem Header="Открыть" />
+                <MenuItem x:Name="SaveMenuItem" Header="Сохранить" />
+                <MenuItem Header="Выход" />
             </MenuItem>
             <MenuItem Header="Вид">
                 <MenuItem Header="Во весь экран" Click="FullScreen_Click"/>
@@ -21,8 +21,8 @@
                 <MenuItem Header="Свернуть" Click="Minimize_Click"/>
             </MenuItem>
             <MenuItem Header="CSTStudioSuite">
-                <MenuItem Header="Запуск CST" Click="CSTLaunch_Click"/>
-                <MenuItem x:Name="CalculateEMIImpact"  Header="Отрисовать Чертеж" Click="CalculateEMIImpact_Click"/>
+                <!--<MenuItem Header="Запуск CST" Click="CSTLaunch_Click"/>
+                <MenuItem x:Name="CalculateEMIImpact"  Header="Отрисовать Чертеж" Click="CalculateEMIImpact_Click"/>-->
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="Помощь" Click="HelpMenuItem_Click"/>

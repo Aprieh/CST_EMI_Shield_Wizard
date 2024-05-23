@@ -5,8 +5,69 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CST_EMI_Shield_Wizard"
         mc:Ignorable="d"
-        Title="FeedBack" Height="450" Width="800">
+        Title="Обратная связь" Height="640" Width="480">
     <Grid>
         
+        <RichTextBox IsReadOnly="True" Margin="0">
+            <FlowDocument>
+                <Paragraph FontSize="14" FontWeight="Bold">Обратная связь</Paragraph>
+                <Paragraph>Мы всегда рады услышать ваше мнение о нашей программе! Ваши отзывы и предложения помогают нам улучшать продукт и делать его еще более полезным и удобным.</Paragraph>
+                <Paragraph FontWeight="Bold">Как связаться с нами:</Paragraph>
+                <List>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>Электронная почта:</Bold> support@example.com
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>Телефон:</Bold> +1 (800) 123-4567
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>Адрес:</Bold> 123 Main Street, Suite 100, YourCity, YourCountry
+                        </Paragraph>
+                    </ListItem>
+                </List>
+                <Paragraph FontWeight="Bold">Что можно сообщить:</Paragraph>
+                <List>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>Ошибки и проблемы:</Bold> Если вы столкнулись с ошибками или сбоями в работе программы, пожалуйста, сообщите нам об этом. Опишите проблему как можно подробнее, укажите шаги, которые привели к ошибке, и приложите снимки экрана, если это возможно.
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>Предложения по улучшению:</Bold> Если у вас есть идеи, как сделать программу лучше, поделитесь ими с нами. Мы ценим ваши предложения и стремимся сделать продукт максимально удобным и функциональным.
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>Общие отзывы:</Bold> Нам важно знать ваше общее впечатление от использования программы. Что вам понравилось, а что можно улучшить?
+                        </Paragraph>
+                    </ListItem>
+                </List>
+                <Paragraph FontWeight="Bold">Социальные сети:</Paragraph>
+                <List>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>Twitter:</Bold> @ExampleSupport
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>Facebook:</Bold> facebook.com/ExampleSupport
+                        </Paragraph>
+                    </ListItem>
+                    <ListItem>
+                        <Paragraph>
+                            <Bold>LinkedIn:</Bold> linkedin.com/company/ExampleSupport
+                        </Paragraph>
+                    </ListItem>
+                </List>
+            </FlowDocument>
+        </RichTextBox>
+
     </Grid>
 </Window>
