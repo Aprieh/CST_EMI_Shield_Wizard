@@ -239,8 +239,9 @@
                 <TabItem x:Name="ResultsTab" Header="Результаты">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <GroupBox Header="Полученный экран">
                             <Grid>
@@ -257,26 +258,26 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopAmplitudeTextBox" Margin="5"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopAmplitudeTextBox" Margin="5" IsReadOnly="True"/>
                                 <Label Grid.Row="0" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopHTextBox" Margin="5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopHTextBox" Margin="5" IsReadOnly="True"/>
                                 <Label Grid.Row="1" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5" IsReadOnly="True"/>
 
-                                <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5"/>
+                                <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click"/>
                                 <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5"/>
-                                
-                                
+
+
                             </Grid>
                         </GroupBox>
                         <GroupBox Header="Сравнить с существующим" Grid.Row="1">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    
+
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
@@ -293,18 +294,48 @@
 
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5" IsReadOnly="True"/>
                                 <Label Grid.Row="1" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5"/>
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5" IsReadOnly="True"/>
                                 <Label Grid.Row="2" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5"/>
+                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5" IsReadOnly="True"/>
 
-                                <Button Grid.Row="4" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheLoaded" Margin="5"/>
+                                <Button Grid.Row="4" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheLoaded" Margin="5" Click="ShowGraphOfTheLoaded_Click"/>
                                 <Button Grid.Row="5" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithCalculated" Margin="5"/>
+                            </Grid>
+                        </GroupBox>
+                        <GroupBox Grid.Row="2" Header="Эффективность экранирования">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <GroupBox Header ="С отсутствием экрана" Grid.Column="0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="S (без экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyWithoutTextBox" Margin="0,5" IsReadOnly="True"/>
+                                    </Grid>
+                                </GroupBox>
+                                <GroupBox Header ="С другим экраном" Grid.Column="1">
+                                    
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label Content="S (другой экран) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyAnotherTextBox" Margin="0,5" IsReadOnly="True"/>
+                                    </Grid>
+                                </GroupBox>
                             </Grid>
                         </GroupBox>
                     </Grid>

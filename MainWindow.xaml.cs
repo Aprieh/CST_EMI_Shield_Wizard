@@ -1,6 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using OxyPlot.Series;
+using OxyPlot;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 
 namespace CST_EMI_Shield_Wizard
@@ -13,11 +16,17 @@ namespace CST_EMI_Shield_Wizard
             "Copper (pure)", "Polycarbonate (lossy)", "Polyimide (lossy)",
             "Polyimide (loss free)", "Zinc", "Aluminum"
         };
+        private List<string> spaceSettings = new List<string> {
+            "Open", "Open (add space)"
+        };
         public MainWindow()
         {
             InitializeComponent();
             PopulateMaterialComboBox();
             InitializeLayerDataGrid();
+            PopulateSpaceSetters();
+
+            InitializeValidation();
 
             InitSimulation.Click += CalculateEMIImpact_Click;
         }
@@ -29,7 +38,55 @@ namespace CST_EMI_Shield_Wizard
                 materialComboBox.Items.Add(material);
             }
         }
+        private void PopulateSpaceSetters()
+        {
+            foreach (var setting in spaceSettings)
+            {
+                xMinBndComboBox.Items.Add(setting);
+                yMinBndComboBox.Items.Add(setting);
+                zMinBndComboBox.Items.Add(setting);
+                xMaxBndComboBox.Items.Add(setting);
+                yMaxBndComboBox.Items.Add(setting);
+                zMaxBndComboBox.Items.Add(setting);
+            }
+        }
 
+        private void InitializeValidation()
+        {
+            xMinTextBox.TextChanged += ValidateTextBox;
+            yMinTextBox.TextChanged += ValidateTextBox;
+            zMinTextBox.TextChanged += ValidateTextBox;
+            xMaxTextBox.TextChanged += ValidateTextBox;
+            yMaxTextBox.TextChanged += ValidateTextBox;
+            zMaxTextBox.TextChanged += ValidateTextBox;
+            probeXPosTextBox.TextChanged += ValidateTextBox;
+            probeYPosTextBox.TextChanged += ValidateTextBox;
+            probeZPosTextBox.TextChanged += ValidateTextBox;
+            xNormalTextBox.TextChanged += ValidateTextBox;
+            yNormalTextBox.TextChanged += ValidateTextBox;
+            zNormalTextBox.TextChanged += ValidateTextBox;
+            xElectricFieldTextBox.TextChanged += ValidateTextBox;
+            yElectricFieldTextBox.TextChanged += ValidateTextBox;
+            zElectricFieldTextBox.TextChanged += ValidateTextBox;
+        }
+        private void ValidateTextBox(object sender, TextChangedEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (textBox != null)
+            {
+                bool isValid = double.TryParse(textBox.Text, out double result);
+                if (!isValid)
+                {
+                    textBox.Background = new SolidColorBrush(Color.FromArgb(255, 255, 255, 204)); // Светло-желтый цвет
+                    textBox.Tag = "Invalid";
+                }
+                else
+                {
+                    textBox.Background = Brushes.White;
+                    textBox.Tag = null;
+                }
+            }
+        }
         private void InitializeLayerDataGrid()
         {
             layerDataGrid.ItemsSource = new ObservableCollection<LayerData>();
@@ -139,7 +196,61 @@ namespace CST_EMI_Shield_Wizard
             }
         }
 
-        
+        private void ShowGraphOfTheCalculated_Click(object sender, RoutedEventArgs e)
+        {
+            var graphView = new GraphView
+            {
+                PlotModel = CreateCalculatedGraph()
+            };
+            graphView.Show();
+        }
+
+        private void ShowGraphOfTheLoaded_Click(object sender, RoutedEventArgs e)
+        {
+            var graphView = new GraphView
+            {
+                PlotModel = CreateLoadedGraph()
+            };
+            graphView.Show();
+        }
+
+        private PlotModel CreateCalculatedGraph()
+        {
+            var plotModel = new PlotModel { Title = "Calculated Graph" };
+            var lineSeries = new LineSeries
+            {
+                Title = "Calculated Data",
+                MarkerType = MarkerType.Circle
+            };
+
+            // Добавьте здесь данные для графика рассчитанных данных
+            lineSeries.Points.Add(new DataPoint(0, 0));
+            lineSeries.Points.Add(new DataPoint(10, 20));
+            lineSeries.Points.Add(new DataPoint(20, 10));
+            lineSeries.Points.Add(new DataPoint(30, 40));
+
+            plotModel.Series.Add(lineSeries);
+            return plotModel;
+        }
+
+        private PlotModel CreateLoadedGraph()
+        {
+            var plotModel = new PlotModel { Title = "Loaded Graph" };
+            var lineSeries = new LineSeries
+            {
+                Title = "Loaded Data",
+                MarkerType = MarkerType.Circle
+            };
+
+            // Добавьте здесь данные для графика загруженных данных
+            lineSeries.Points.Add(new DataPoint(0, 10));
+            lineSeries.Points.Add(new DataPoint(10, 30));
+            lineSeries.Points.Add(new DataPoint(20, 20));
+            lineSeries.Points.Add(new DataPoint(30, 50));
+
+            plotModel.Series.Add(lineSeries);
+            return plotModel;
+        }
     }
     public class LayerData
     {
