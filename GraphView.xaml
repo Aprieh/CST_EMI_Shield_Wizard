@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="GraphView" Height="450" Width="800">
     <Grid>
-        <oxy:PlotView Model="{Binding PlotModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+                <!-- Разделение между графиками -->
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <oxy:PlotView Model="{Binding MagneticShieldingModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" />
+            <Separator Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Height="2" Background="Gray" />
+            <oxy:PlotView Model="{Binding ElectricShieldingModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="2" />
+        </Grid>
     </Grid>
 </Window>

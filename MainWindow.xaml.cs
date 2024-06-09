@@ -8,8 +8,11 @@ using System.Windows.Media;
 
 namespace CST_EMI_Shield_Wizard
 {
+    
     public partial class MainWindow : Window
     {
+        public ObservableCollection<Project> Projects { get; set; }
+
         private CSTController cstController = new();
         private List<string> materials = new List<string> {
             "Alumina (96%) (lossy)", "Alumina (96%) (loss free)",
@@ -30,6 +33,88 @@ namespace CST_EMI_Shield_Wizard
             InitializeValidation();
 
             InitSimulation.Click += CalculateEMIImpact_Click;
+
+            DataContext = this;
+            LoadProjects();
+        }
+
+        private void LoadProjects()
+        {
+            Projects = new ObservableCollection<Project>
+            {
+                new Project { ProjectName = "Project A", CreationDate = new DateTime(2024, 5, 20, 10, 30, 0), LastModifiedDate = new DateTime(2024, 5, 20, 10, 30, 0) },
+                new Project { ProjectName = "Project B", CreationDate = new DateTime(2024, 5, 21, 11, 45, 0), LastModifiedDate = new DateTime(2024, 5, 21, 11, 45, 0) },
+                new Project { ProjectName = "Project C", CreationDate = new DateTime(2024, 5, 22, 14, 0, 0), LastModifiedDate = new DateTime(2024, 5, 22, 14, 0, 0) },
+                new Project { ProjectName = "Project D", CreationDate = new DateTime(2024, 5, 23, 9, 15, 0), LastModifiedDate = new DateTime(2024, 5, 23, 9, 15, 0) },
+                new Project { ProjectName = "Project E", CreationDate = new DateTime(2024, 5, 24, 16, 30, 0), LastModifiedDate = new DateTime(2024, 5, 24, 16, 30, 0) }
+            };
+            ProjectsList.ItemsSource = Projects;
+        }
+
+        private void ProjectsListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ProjectsList.SelectedItem is Project selectedProject)
+            {
+                ProjectNameTextBox.Text = selectedProject.ProjectName;
+                CreationDateTextBox.Text = selectedProject.CreationDate.ToString("dd.MM.yyyy HH:mm");
+                ChangeDateTextBox.Text = selectedProject.LastModifiedDate.ToString("dd.MM.yyyy HH:mm");
+            }
+        }
+
+        private void CreateProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            var createProjectWindow = new CreateProjectWindow();
+            if (createProjectWindow.ShowDialog() == true)
+            {
+                string newProjectName = createProjectWindow.ProjectName;
+                if (Projects.Any(p => p.ProjectName == newProjectName))
+                {
+                    MessageBox.Show("Проект с таким именем уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    var newProject = new Project
+                    {
+                        ProjectName = newProjectName,
+                        CreationDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now
+                    };
+                    Projects.Add(newProject);
+                }
+            }
+        }
+
+        private void ChangeProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProjectsList.SelectedItem is Project selectedProject)
+            {
+                selectedProject.LastModifiedDate = DateTime.Now;
+                ProjectsList.Items.Refresh();
+                ProjectsListView_SelectionChanged(null, null);
+            }
+        }
+
+        private void RenameProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProjectsList.SelectedItem is Project selectedProject)
+            {
+                //метод пока пустышка
+                selectedProject.ProjectName = "Renamed Project";
+                selectedProject.LastModifiedDate = DateTime.Now;
+                ProjectsList.Items.Refresh();
+                ProjectsListView_SelectionChanged(null, null);
+            }
+        }
+
+        private void DeleteProjectButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ProjectsList.SelectedItem is Project selectedProject)
+            {
+                Projects.Remove(selectedProject);
+                ProjectNameTextBox.Clear();
+                CreationDateTextBox.Clear();
+                ChangeDateTextBox.Clear();
+            }
         }
 
         private void InitSimulation_Click(object sender, RoutedEventArgs e)
@@ -112,24 +197,52 @@ namespace CST_EMI_Shield_Wizard
 
         private void AddLayerButton_Click(object sender, RoutedEventArgs e)
         {
-            string layerName = layerNameTextBox.Text;
-            string material = materialComboBox.SelectedItem as string;
-
-            double minX = Convert.ToDouble(xMinTextBox.Text);
-            double minY = Convert.ToDouble(yMinTextBox.Text);
-            double minZ = Convert.ToDouble(zMinTextBox.Text);
-            double maxX = Convert.ToDouble(xMaxTextBox.Text);
-            double maxY = Convert.ToDouble(yMaxTextBox.Text);
-            double maxZ = Convert.ToDouble(zMaxTextBox.Text);
-
-            var layers = layerDataGrid.ItemsSource as ObservableCollection<LayerData>;
-            layers.Add(new LayerData
+            try
             {
-                LayerName = layerName,
-                Material = material,
-                MinCoordinates = $"[{minX}, {minY}, {minZ}]",
-                MaxCoordinates = $"[{maxX}, {maxY}, {maxZ}]"
-            });
+                string layerName = layerNameTextBox.Text;
+                if (string.IsNullOrWhiteSpace(layerName))
+                {
+                    MessageBox.Show("Имя слоя не может быть пустым.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                string material = materialComboBox.SelectedItem as string;
+                if (material == null)
+                {
+                    MessageBox.Show("Выберите материал.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                if (!double.TryParse(xMinTextBox.Text, out double minX) ||
+                    !double.TryParse(yMinTextBox.Text, out double minY) ||
+                    !double.TryParse(zMinTextBox.Text, out double minZ) ||
+                    !double.TryParse(xMaxTextBox.Text, out double maxX) ||
+                    !double.TryParse(yMaxTextBox.Text, out double maxY) ||
+                    !double.TryParse(zMaxTextBox.Text, out double maxZ))
+                {
+                    MessageBox.Show("Введите корректные числовые значения для координат.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                var layers = layerDataGrid.ItemsSource as ObservableCollection<LayerData>;
+                if (layers == null)
+                {
+                    layers = new ObservableCollection<LayerData>();
+                    layerDataGrid.ItemsSource = layers;
+                }
+
+                layers.Add(new LayerData
+                {
+                    LayerName = layerName,
+                    Material = material,
+                    MinCoordinates = $"[{minX}, {minY}, {minZ}]",
+                    MaxCoordinates = $"[{maxX}, {maxY}, {maxZ}]"
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void DeleteSelectedLayerButton_Click(object sender, RoutedEventArgs e)
@@ -217,57 +330,15 @@ namespace CST_EMI_Shield_Wizard
         private void ShowGraphOfTheCalculated_Click(object sender, RoutedEventArgs e)
         {
             var graphView = new GraphView();
-            var parser = new DataParser();
-            parser.Parse(@"C:\Files\AdvancedShield.txt");
-            graphView.UpdateGraph(parser.Title, parser.XLabel, parser.YLabel, parser.DataPoints);
+            graphView.LoadData(@"C:\Files\AdvancedShield.txt", @"C:\Files\AdvancedShield.txt"); // Изменено: передаем два файла
             graphView.Show();
         }
 
         private void ShowGraphOfTheLoaded_Click(object sender, RoutedEventArgs e)
         {
             var graphView = new GraphView();
-            var parser = new DataParser();
-            parser.Parse(@"C:\Files\SimpleShield.txt");
-            graphView.UpdateGraph(parser.Title, parser.XLabel, parser.YLabel, parser.DataPoints);
+            graphView.LoadData(@"C:\Files\SimpleShield.txt", @"C:\Files\SimpleShield.txt"); // Изменено: передаем два файла
             graphView.Show();
-        }
-
-        private PlotModel CreateCalculatedGraph()
-        {
-            var plotModel = new PlotModel { Title = "Calculated Graph" };
-            var lineSeries = new LineSeries
-            {
-                Title = "Calculated Data",
-                MarkerType = MarkerType.Circle
-            };
-
-            // Добавьте здесь данные для графика рассчитанных данных
-            lineSeries.Points.Add(new DataPoint(0, 0));
-            lineSeries.Points.Add(new DataPoint(10, 20));
-            lineSeries.Points.Add(new DataPoint(20, 10));
-            lineSeries.Points.Add(new DataPoint(30, 40));
-
-            plotModel.Series.Add(lineSeries);
-            return plotModel;
-        }
-
-        private PlotModel CreateLoadedGraph()
-        {
-            var plotModel = new PlotModel { Title = "Loaded Graph" };
-            var lineSeries = new LineSeries
-            {
-                Title = "Loaded Data",
-                MarkerType = MarkerType.Circle
-            };
-
-            // Добавьте здесь данные для графика загруженных данных
-            lineSeries.Points.Add(new DataPoint(0, 10));
-            lineSeries.Points.Add(new DataPoint(10, 30));
-            lineSeries.Points.Add(new DataPoint(20, 20));
-            lineSeries.Points.Add(new DataPoint(30, 50));
-
-            plotModel.Series.Add(lineSeries);
-            return plotModel;
         }
 
         private void CompareWithAbcent_Click(object sender, RoutedEventArgs e)

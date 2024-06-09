@@ -20,14 +20,13 @@
                 <MenuItem Header="Восстановить размер" Click="RestoreSize_Click"/>
                 <MenuItem Header="Свернуть" Click="Minimize_Click"/>
             </MenuItem>
-            <MenuItem Header="CSTStudioSuite">
+            <MenuItem Header="CST Studio Suite">
                 <MenuItem Header="Запуск CST" Click="CSTLaunch_Click"/>
-                <MenuItem x:Name="CalculateEMIImpact"  Header="Начать симуляцию" Click="CalculateEMIImpact_Click"/>
+                <MenuItem x:Name="CalculateEMIImpact"  Header="Запустить расчет" Click="CalculateEMIImpact_Click"/>
             </MenuItem>
             <MenuItem Header="Справка">
                 <MenuItem Header="Помощь" Click="HelpMenuItem_Click"/>
                 <MenuItem Header="О программе" Click="AboutMenuItem_Click"/>
-                <MenuItem Header="Обратная связь" Click="FeedbackMenuItem_Click"/>
 
             </MenuItem>
         </Menu>
@@ -37,6 +36,62 @@
         </StatusBar>
         <Grid x:Name="GridForPanels" >
             <TabControl x:Name="InterfaceTabs">
+                <TabItem x:Name="ProjectTab" Header ="Проекты">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ListView x:Name="ProjectsList" SelectionChanged="ProjectsListView_SelectionChanged">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Название" DisplayMemberBinding="{Binding ProjectName}" Width="200"/>
+                                    <GridViewColumn Header="Дата изменения" Width="200">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding LastModifiedDate, StringFormat='dd.MM.yyyy HH:mm'}"/>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock TextWrapping="Wrap" Text="Название проекта:" Margin="5"/>
+                            <TextBox x:Name="ProjectNameTextBox" TextWrapping="Wrap" Margin="5" IsReadOnly="True" />
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="Дата создания:" Margin="5" />
+                                <TextBox x:Name="CreationDateTextBox" Margin="5" IsReadOnly="True" Grid.Column="1" BorderBrush="{x:Null}" />
+                                <TextBlock Text="Дата изменения:" Margin="5" Grid.Row="1" />
+                                <TextBox x:Name="ChangeDateTextBox" Grid.Row="1" Grid.Column="1" Margin="5" IsReadOnly="True" BorderBrush="{x:Null}" />
+                            </Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Button x:Name="CreateProjectButton" Content="Создать проект" Margin="5" Grid.Column="0" Click="CreateProjectButton_Click"/>
+                                <Button x:Name="ChangeProjectButton" Content="Редактировать проект" Margin="5"  Grid.Column="1" Click="ChangeProjectButton_Click"/>
+                                <Button x:Name="RenameProjectButton" Grid.Column="2" Content="Переименовать проект" Margin="5" Click="RenameProjectButton_Click"/>
+                                <Button x:Name="DeleteProjectButton" Grid.Column="2" Grid.Row ="1" Content="Удалить" Margin="5" Click="DeleteProjectButton_Click"/>
+                            </Grid>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+
                 <TabItem x:Name="ShieldTab" Header="Экран">
                     <Grid Margin="5">
                         <Grid.RowDefinitions>
@@ -60,18 +115,18 @@
                         <Button Grid.Row="8" Grid.Column="0" Content="Добавить слой" Margin="5,5,5,5" Click="AddLayerButton_Click"/>
 
                         <Label Grid.Row="1" Grid.Column="0" Content="Название слоя:" Margin="5"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" x:Name="layerNameTextBox" Margin="5"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" x:Name="layerNameTextBox" Margin="5" VerticalAlignment="Center"/>
 
                         <Label Grid.Row="2" Grid.Column="0" Content="Материал:" Margin="5"/>
-                        <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" x:Name="materialComboBox" Margin="5"/>
+                        <ComboBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" x:Name="materialComboBox" Margin="5" VerticalAlignment="Center"/>
 
                         <Label Grid.Row="3" Grid.Column="1" Content="X min" Margin="5"/>
                         <Label Grid.Row="3" Grid.Column="2" Content="Y min" Margin="5"/>
                         <Label Grid.Row="3" Grid.Column="3" Content="Z min" Margin="5"/>
 
-                        <TextBox Grid.Row="4" Grid.Column="1" x:Name="xMinTextBox" Margin="5" />
-                        <TextBox Grid.Row="4" Grid.Column="2" x:Name="yMinTextBox" Margin="5"/>
-                        <TextBox Grid.Row="4" Grid.Column="3" x:Name="zMinTextBox" Margin="5"/>
+                        <TextBox Grid.Row="4" Grid.Column="1" x:Name="xMinTextBox" Margin="5" VerticalAlignment="Center" />
+                        <TextBox Grid.Row="4" Grid.Column="2" x:Name="yMinTextBox" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="4" Grid.Column="3" x:Name="zMinTextBox" Margin="5" VerticalAlignment="Center"/>
 
                         <Label Grid.Row="4" Grid.Column="0" Content="Начальная точка:" Margin="5"/>
 
@@ -79,9 +134,9 @@
                         <Label Grid.Row="5" Grid.Column="2" Content="Y max" Margin="5"/>
                         <Label Grid.Row="5" Grid.Column="3" Content="Z max" Margin="5"/>
 
-                        <TextBox Grid.Row="6" Grid.Column="1" x:Name="xMaxTextBox" Margin="5"/>
-                        <TextBox Grid.Row="6" Grid.Column="2" x:Name="yMaxTextBox" Margin="5"/>
-                        <TextBox Grid.Row="6" Grid.Column="3" x:Name="zMaxTextBox" Margin="5"/>
+                        <TextBox Grid.Row="6" Grid.Column="1" x:Name="xMaxTextBox" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="6" Grid.Column="2" x:Name="yMaxTextBox" Margin="5" VerticalAlignment="Center"/>
+                        <TextBox Grid.Row="6" Grid.Column="3" x:Name="zMaxTextBox" Margin="5" VerticalAlignment="Center"/>
 
                         <Label Grid.Row="6" Grid.Column="0" Content="Конечная точка:" Margin="5"/>
 
@@ -112,7 +167,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" Content="Название воздействия" Margin="5"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="impactNameTextBox" Margin="5"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="impactNameTextBox" Margin="5" VerticalAlignment="Center"/>
 
                         <GroupBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Header="Граничные условия">
                             <Grid>
@@ -129,22 +184,22 @@
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="X min"/>
-                                <ComboBox Grid.Row="1" Grid.Column="0" x:Name="xMinBndComboBox"/>
+                                <ComboBox Grid.Row="1" Grid.Column="0" x:Name="xMinBndComboBox" VerticalAlignment="Center"/>
 
                                 <Label Grid.Row="0" Grid.Column="1" Content="Y min"/>
-                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="yMinBndComboBox"/>
+                                <ComboBox Grid.Row="1" Grid.Column="1" x:Name="yMinBndComboBox" VerticalAlignment="Center"/>
 
                                 <Label Grid.Row="0" Grid.Column="2" Content="Z min"/>
-                                <ComboBox Grid.Row="1" Grid.Column="2" x:Name="zMinBndComboBox"/>
+                                <ComboBox Grid.Row="1" Grid.Column="2" x:Name="zMinBndComboBox" VerticalAlignment="Center"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="X max"/>
-                                <ComboBox Grid.Row="3" Grid.Column="0" x:Name="xMaxBndComboBox"/>
+                                <ComboBox Grid.Row="3" Grid.Column="0" x:Name="xMaxBndComboBox" VerticalAlignment="Center"/>
 
                                 <Label Grid.Row="2" Grid.Column="1" Content="Y max"/>
-                                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="yMaxBndComboBox"/>
+                                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="yMaxBndComboBox" VerticalAlignment="Center"/>
 
                                 <Label Grid.Row="2" Grid.Column="2" Content="Z max"/>
-                                <ComboBox Grid.Row="3" Grid.Column="2" x:Name="zMaxBndComboBox"/>
+                                <ComboBox Grid.Row="3" Grid.Column="2" x:Name="zMaxBndComboBox" VerticalAlignment="Center"/>
                             </Grid>
                         </GroupBox>
 
@@ -170,22 +225,22 @@
                                 <Label Grid.Row="0" Grid.Column="3" Content="Z" Margin="5,5,5,5"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Нормаль распространения по X Y Z:" Margin="5,5,5,5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="xNormalTextBox" Margin="5,5,5,5"/>
-                                <TextBox Grid.Row="1" Grid.Column="2" x:Name="yNormalTextBox" Margin="5,5,5,5"/>
-                                <TextBox Grid.Row="1" Grid.Column="3" x:Name="zNormalTextBox" Margin="5,5,5,5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="xNormalTextBox" Margin="5,5,5,5" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="1" Grid.Column="2" x:Name="yNormalTextBox" Margin="5,5,5,5" VerticalAlignment="Center"/>
+                                <TextBox Grid.Row="1" Grid.Column="3" x:Name="zNormalTextBox" Margin="5,5,5,5" VerticalAlignment="Center"/>
 
                                 <Label Grid.Row="2" Grid.Column="1" Content="X" Margin="5,5,5,5"/>
                                 <Label Grid.Row="2" Grid.Column="2" Content="Y" Margin="5,5,5,5"/>
                                 <Label Grid.Row="2" Grid.Column="3" Content="Z" Margin="5,5,5,5"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Вектор электрического поля по X Y Z:" Margin="5,5,5,5" />
-                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="xElectricFieldTextBox" Margin="5,5,5,5" />
-                                <TextBox Grid.Row="3" Grid.Column="2" x:Name="yElectricFieldTextBox" Margin="5,5,5,5" />
-                                <TextBox Grid.Row="3" Grid.Column="3" x:Name="zElectricFieldTextBox" Margin="5,5,5,5" />
+                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="xElectricFieldTextBox" Margin="5,5,5,5" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="3" Grid.Column="2" x:Name="yElectricFieldTextBox" Margin="5,5,5,5" VerticalAlignment="Center" />
+                                <TextBox Grid.Row="3" Grid.Column="3" x:Name="zElectricFieldTextBox" Margin="5,5,5,5" VerticalAlignment="Center" />
                                 <Label Grid.Row="3" Grid.Column="4" Content="В/м" Margin="5,5,5,5"/>
-                                
+
                                 <Label Grid.Row="4" Grid.Column="0" Content="Частота плоской волны:" Margin="5,5,5,5" />
-                                <TextBox Grid.Row="4" Grid.Column="1" x:Name="WaveFreqTextBox" Margin="5,5,5,5" Grid.ColumnSpan="2"/>
+                                <TextBox Grid.Row="4" Grid.Column="1" x:Name="WaveFreqTextBox" Margin="5,5,5,5" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
                                 <Label Grid.Row="4" Grid.Column="3" Content="МГц" Margin="5,5,5,5" />
                             </Grid>
                         </GroupBox>
@@ -226,13 +281,13 @@
                                         </Grid.ColumnDefinitions>
 
                                         <Label Grid.Row="0" Grid.Column="0" Content="X:" Margin="5"/>
-                                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="probeXPosTextBox" Margin="5"/>
+                                        <TextBox Grid.Row="0" Grid.Column="1" x:Name="probeXPosTextBox" Margin="5" VerticalAlignment="Center"/>
 
                                         <Label Grid.Row="1" Grid.Column="0" Content="Y:" Margin="5"/>
-                                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="probeYPosTextBox" Margin="5"/>
+                                        <TextBox Grid.Row="1" Grid.Column="1" x:Name="probeYPosTextBox" Margin="5" VerticalAlignment="Center"/>
 
                                         <Label Grid.Row="2" Grid.Column="0" Content="Z:" Margin="5"/>
-                                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="probeZPosTextBox" Margin="5"/>
+                                        <TextBox Grid.Row="2" Grid.Column="1" x:Name="probeZPosTextBox" Margin="5" VerticalAlignment="Center"/>
                                     </Grid>
                                 </GroupBox>
                             </Grid>
@@ -279,7 +334,7 @@
 
                             </Grid>
                         </GroupBox>
-                        <GroupBox Header="Сравнить с существующим" Grid.Row="1">
+                        <GroupBox Header="Сравнение эфективности экранирования" Grid.Row="1">
                             <Grid>
                                 <Grid.ColumnDefinitions>
 
@@ -308,9 +363,7 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5"  />
-
-                                <Button Grid.Row="4" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheLoaded" Margin="5" Click="ShowGraphOfTheLoaded_Click"/>
-                                <Button Grid.Row="5" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithCalculated" Margin="5"/>
+                                <Button Grid.Row="5" Grid.Column="1" Content="Сравнение эффективности экранирования" x:Name="CompareWithCalculated" Margin="5"/>
                             </Grid>
                         </GroupBox>
                         <GroupBox Grid.Row="2" Header="Эффективность экранирования">
@@ -320,7 +373,7 @@
                                     <ColumnDefinition/>
                                 </Grid.ColumnDefinitions>
 
-                                <GroupBox Header ="С отсутствием экрана" Grid.Column="0">
+                                <GroupBox Header ="Сравенние - экран отсутсвует" Grid.Column="0">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -330,13 +383,13 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Content="S(H) (без экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
+                                        <Label Content="S(H) (исследуемого экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
                                         <TextBox Grid.Column="1" x:Name="ShieldEfficacyHWithoutTextBox" Margin="0,5"  />
-                                        <Label Content="S(E) (без экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5" Grid.Row="1"/>
+                                        <Label Content="S(E) (исследуемого экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5" Grid.Row="1"/>
                                         <TextBox Grid.Column="1" x:Name="ShieldEfficacyEWithoutTextBox" Margin="0,5"   Grid.Row="1"/>
                                     </Grid>
                                 </GroupBox>
-                                <GroupBox Header ="С другим экраном" Grid.Column="1">
+                                <GroupBox Header ="Сравенение - с другим экраном" Grid.Column="1">
 
                                     <Grid>
                                         <Grid.ColumnDefinitions>
@@ -347,9 +400,9 @@
                                             <RowDefinition/>
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
-                                        <Label Content="S(H) (другой экран) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
+                                        <Label Content="S(H) (исследуемого экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
                                         <TextBox Grid.Column="1" x:Name="ShieldEfficacyHAnotherTextBox" Margin="0,5"  />
-                                        <Label Content="S(E) (другой экран) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5" Grid.Row="1"/>
+                                        <Label Content="S(E) (исследуемого экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5" Grid.Row="1"/>
                                         <TextBox Grid.Column="1" x:Name="ShieldEfficacyEAnotherTextBox" Margin="0,5"   Grid.Row="1"/>
                                     </Grid>
                                 </GroupBox>
