@@ -10,6 +10,56 @@ using System.Globalization;
 
 namespace CST_EMI_Shield_Wizard
 {
+    public class DataParser
+    {
+        public string Title { get; private set; }
+        public string XLabel { get; private set; }
+        public string YLabel { get; private set; }
+        public List<DataPoint> DataPoints { get; private set; }
+
+        public DataParser()
+        {
+            DataPoints = new List<DataPoint>();
+        }
+
+        public void Parse(string filePath)
+        {
+            var lines = File.ReadAllLines(filePath);
+            bool dataSection = false;
+
+            foreach (var line in lines)
+            {
+                if (line.StartsWith("Title"))
+                {
+                    Title = line.Split('=')[1].Trim();
+                }
+                else if (line.StartsWith("Xlabel"))
+                {
+                    XLabel = line.Split('=')[1].Trim();
+                }
+                else if (line.StartsWith("Ylabel"))
+                {
+                    YLabel = line.Split('=')[1].Trim();
+                }
+                else if (line.StartsWith("Data/Title"))
+                {
+                    dataSection = true;
+                }
+                else if (dataSection)
+                {
+                    var values = line.Split('\t');
+                    if (values.Length == 2)
+                    {
+                        if (double.TryParse(values[0].Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double x) &&
+                            double.TryParse(values[1].Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double y))
+                        {
+                            DataPoints.Add(new DataPoint(x, y));
+                        }
+                    }
+                }
+            }
+        }
+    }
     public partial class GraphView : Window
     {
         public PlotModel MagneticShieldingModel { get; private set; }
@@ -25,8 +75,8 @@ namespace CST_EMI_Shield_Wizard
             InitializeComponent();
             DataContext = this;
 
-            MagneticShieldingModel = new PlotModel { Title = "Магнитная составляющая экранирования" };
-            ElectricShieldingModel = new PlotModel { Title = "Электрическая составляющая экранирования" };
+            MagneticShieldingModel = new PlotModel { Title = "Магнитное воздействие" };
+            ElectricShieldingModel = new PlotModel { Title = "Электрическое воздействие" };
 
             CreateGraphModels();
         }
@@ -34,7 +84,12 @@ namespace CST_EMI_Shield_Wizard
         private void CreateGraphModels()
         {
             // Магнитная составляющая экранирования
-            magneticLineSeries = new LineSeries { Title = "Магнитное экранирование", MarkerType = MarkerType.Circle };
+            magneticLineSeries = new LineSeries
+            {
+                Title = "Магнитное воздействие",
+                MarkerType = MarkerType.None,
+                Color = OxyColors.Blue
+            };
             MagneticShieldingModel.Series.Add(magneticLineSeries);
 
             magneticMaxAnnotation = new LineAnnotation
@@ -49,7 +104,12 @@ namespace CST_EMI_Shield_Wizard
             MagneticShieldingModel.Annotations.Add(magneticMaxAnnotation);
 
             // Электрическая составляющая экранирования
-            electricLineSeries = new LineSeries { Title = "Электрическое экранирование", MarkerType = MarkerType.Circle };
+            electricLineSeries = new LineSeries
+            {
+                Title = "Электрическое воздействие",
+                MarkerType = MarkerType.None,
+                Color = OxyColors.Red
+            };
             ElectricShieldingModel.Series.Add(electricLineSeries);
 
             electricMaxAnnotation = new LineAnnotation
@@ -95,55 +155,6 @@ namespace CST_EMI_Shield_Wizard
             maxAnnotation.X = maxPoint.X;
 
             plotModel.InvalidatePlot(true);
-        }
-    }
-
-    public class DataParser
-    {
-        public string Title { get; private set; }
-        public string XLabel { get; private set; }
-        public string YLabel { get; private set; }
-        public List<DataPoint> DataPoints { get; private set; }
-
-        public DataParser()
-        {
-            DataPoints = new List<DataPoint>();
-        }
-
-        public void Parse(string filePath)
-        {
-            var lines = File.ReadAllLines(filePath);
-            foreach (var line in lines)
-            {
-                if (line.StartsWith("Title"))
-                {
-                    Title = line.Split('=')[1].Trim();
-                }
-                else if (line.StartsWith("Xlabel"))
-                {
-                    XLabel = line.Split('=')[1].Trim();
-                }
-                else if (line.StartsWith("Ylabel"))
-                {
-                    YLabel = line.Split('=')[1].Trim();
-                }
-                else if (!line.StartsWith("Curve") && !line.StartsWith("Filename") && !line.StartsWith("Npoints") &&
-                         !line.StartsWith("Type") && !line.StartsWith("Subtype") && !line.StartsWith("Result type") &&
-                         !line.StartsWith("View type") && !line.StartsWith("Plot type") && !line.StartsWith("Data/Title") &&
-                         !line.StartsWith("X/Label") && !line.StartsWith("X/Unit") && !line.StartsWith("Y/Label") &&
-                         !line.StartsWith("Y/Unit") && !line.StartsWith("Y/Logfactor") && !line.StartsWith("Plot/wrapHeuristics"))
-                {
-                    var values = line.Split('\t');
-                    if (values.Length == 2)
-                    {
-                        if (double.TryParse(values[0].Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double x) &&
-                            double.TryParse(values[1].Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out double y))
-                        {
-                            DataPoints.Add(new DataPoint(x, y));
-                        }
-                    }
-                }
-            }
         }
     }
 }

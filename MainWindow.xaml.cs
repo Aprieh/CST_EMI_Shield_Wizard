@@ -218,20 +218,26 @@ namespace CST_EMI_Shield_Wizard
 
         private void InitSimulation_Click(object sender, RoutedEventArgs e)
         {
-            string resourcePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ManyLayer.cst");
+            string resourcePathManyLayer = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ManyLayer.cst");
+            string resourcePathBesEkrana = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "besEkrana.cst");
 
-            // Логика запуска CST через COM
             try
             {
                 dynamic cstApp = Activator.CreateInstance(Type.GetTypeFromProgID("CSTStudio.Application"));
-                cstApp.OpenFile(resourcePath);
 
-                dynamic project = cstApp.Active3D;
+                cstApp.OpenFile(resourcePathManyLayer);
+                dynamic projectManyLayer = cstApp.Active3D;
 
-                dynamic solver = project.Solver;
-                solver.Start();
+                dynamic solverManyLayer = projectManyLayer.Solver;
+                solverManyLayer.Start();
 
-                MessageBox.Show("Расчет многослойного экрана успешно запущен.", "Запуск расчета", MessageBoxButton.OK, MessageBoxImage.Information);
+                cstApp.OpenFile(resourcePathBesEkrana);
+                dynamic projectBesEkrana = cstApp.Active3D;
+
+                dynamic solverBesEkrana = projectBesEkrana.Solver;
+                solverBesEkrana.Start();
+
+                MessageBox.Show("Расчеты успешно завершены.", "Запуск расчета", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
             {
@@ -400,15 +406,19 @@ namespace CST_EMI_Shield_Wizard
 
         private void ShowGraphOfTheCalculated_Click(object sender, RoutedEventArgs e)
         {
+            string eGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerE.txt");
+            string hGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerH.txt");
             var graphView = new GraphView();
-            graphView.LoadData(@"C:\Files\AdvancedShield.txt", @"C:\Files\AdvancedShield.txt"); // Изменено: передаем два файла
+            graphView.LoadData(eGraph, hGraph);
             graphView.Show();
         }
 
         private void ShowGraphOfTheLoaded_Click(object sender, RoutedEventArgs e)
         {
+            string eGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranE.txt");
+            string hGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranH.txt");
             var graphView = new GraphView();
-            graphView.LoadData(@"C:\Files\SimpleShield.txt", @"C:\Files\SimpleShield.txt"); // Изменено: передаем два файла
+            graphView.LoadData(eGraph, hGraph);
             graphView.Show();
         }
 

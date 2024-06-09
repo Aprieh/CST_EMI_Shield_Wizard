@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CST_EMI_Shield_Wizard"
         mc:Ignorable="d"
-        Title="ПАИМЭК" Height="680" Width="900">
+        Title="Мастер экранов" Height="680" Width="900" Icon="/icon.png" >
 
     
     <DockPanel x:Name="MainDockPanel">
