@@ -32,8 +32,6 @@ namespace CST_EMI_Shield_Wizard
             InitializeUIState();
             InitializeValidation();
 
-            InitSimulation.Click += CalculateEMIImpact_Click;
-
             DataContext = this;
             LoadProjects();
         }
@@ -220,10 +218,29 @@ namespace CST_EMI_Shield_Wizard
 
         private void InitSimulation_Click(object sender, RoutedEventArgs e)
         {
-            ShowTabs(ResultsTab);
-            InterfaceTabs.SelectedItem = ResultsTab; 
-        }
+            string resourcePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "ManyLayer.cst");
 
+            // Логика запуска CST через COM
+            try
+            {
+                dynamic cstApp = Activator.CreateInstance(Type.GetTypeFromProgID("CSTStudio.Application"));
+                cstApp.OpenFile(resourcePath);
+
+                dynamic project = cstApp.Active3D;
+
+                dynamic solver = project.Solver;
+                solver.Start();
+
+                MessageBox.Show("Расчет многослойного экрана успешно запущен.", "Запуск расчета", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при запуске расчета: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            ShowTabs(ResultsTab);
+            InterfaceTabs.SelectedItem = ResultsTab;
+        }
         private void PopulateMaterialComboBox()
         {
             foreach (var material in materials)

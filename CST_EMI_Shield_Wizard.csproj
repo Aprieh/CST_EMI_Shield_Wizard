@@ -37,6 +37,15 @@
     <None Update="AdvancedShield.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Resources\besEkrana.cst">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\ManyLayer.cst">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\prostEkran.cst">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="SimpleShield.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
