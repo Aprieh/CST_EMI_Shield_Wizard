@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Title="ПАИМЭК" Height="680" Width="900">
 
+    
     <DockPanel x:Name="MainDockPanel">
         <Menu x:Name="Menu" DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Создать" />
-                <MenuItem Header="Открыть" />
+                <MenuItem Header="Создать" Click="CreateProjectMenuItem_Click"/>
+                <MenuItem Header="Открыть" Click="OpenProjectMenuItem_Click"/>
                 <MenuItem x:Name="SaveMenuItem" Header="Сохранить" />
                 <MenuItem Header="Выход" />
             </MenuItem>

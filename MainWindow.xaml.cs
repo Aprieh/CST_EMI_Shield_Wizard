@@ -29,13 +29,44 @@ namespace CST_EMI_Shield_Wizard
             PopulateMaterialComboBox();
             InitializeLayerDataGrid();
             PopulateSpaceSetters();
-
+            InitializeUIState();
             InitializeValidation();
 
             InitSimulation.Click += CalculateEMIImpact_Click;
 
             DataContext = this;
             LoadProjects();
+        }
+
+        private void InitializeUIState()
+        {
+            // Скрываем все вкладки при инициализации
+            InterfaceTabs.Items.Remove(ProjectTab);
+            InterfaceTabs.Items.Remove(ShieldTab);
+            InterfaceTabs.Items.Remove(ImpactTab);
+            InterfaceTabs.Items.Remove(ResultsTab);
+        }
+
+        private void ShowTabs(params TabItem[] tabs)
+        {
+            foreach (var tab in tabs)
+            {
+                if (!InterfaceTabs.Items.Contains(tab))
+                {
+                    InterfaceTabs.Items.Add(tab);
+                }
+            }
+        }
+
+        private void HideTabs(params TabItem[] tabs)
+        {
+            foreach (var tab in tabs)
+            {
+                if (InterfaceTabs.Items.Contains(tab))
+                {
+                    InterfaceTabs.Items.Remove(tab);
+                }
+            }
         }
 
         private void LoadProjects()
@@ -56,20 +87,58 @@ namespace CST_EMI_Shield_Wizard
             if (ProjectsList.SelectedItem is Project selectedProject)
             {
                 ProjectNameTextBox.Text = selectedProject.ProjectName;
-                CreationDateTextBox.Text = selectedProject.CreationDate.ToString("dd.MM.yyyy");
-                ChangeDateTextBox.Text = selectedProject.LastModifiedDate.ToString("dd.MM.yyyy");
+                CreationDateTextBox.Text = selectedProject.CreationDate.ToString("dd.MM.yyyy HH:mm");
+                ChangeDateTextBox.Text = selectedProject.LastModifiedDate.ToString("dd.MM.yyyy HH:mm");
+
+                // Активируем кнопки манипуляции проектом
+                SetProjectControlsState(true);
             }
+            else
+            {
+                ClearProjectInfo();
+                SetProjectControlsState(false);
+            }
+        }
+        private void CreateProjectMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            CreateNewProject();
         }
 
         private void CreateProjectButton_Click(object sender, RoutedEventArgs e)
         {
-            var newProject = new Project
+            CreateNewProject();
+        }
+
+        private void CreateNewProject()
+        {
+            var createProjectWindow = new CreateProjectWindow();
+            if (createProjectWindow.ShowDialog() == true)
             {
-                ProjectName = "New Project",
-                CreationDate = DateTime.Now,
-                LastModifiedDate = DateTime.Now
-            };
-            Projects.Add(newProject);
+                string newProjectName = createProjectWindow.ProjectName;
+                if (Projects.Any(p => p.ProjectName == newProjectName))
+                {
+                    MessageBox.Show("Проект с таким именем уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    var newProject = new Project
+                    {
+                        ProjectName = newProjectName,
+                        CreationDate = DateTime.Now,
+                        LastModifiedDate = DateTime.Now
+                    };
+                    Projects.Add(newProject);
+
+                    StatusBarText.Content = $"Проект '{newProjectName}' загружен";
+                    ShowTabs(ShieldTab, ImpactTab);
+                }
+            }
+        }
+        private void OpenProjectMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            ShowTabs(ProjectTab);
+            InterfaceTabs.SelectedItem = ProjectTab;
+
         }
 
         private void ChangeProjectButton_Click(object sender, RoutedEventArgs e)
@@ -79,6 +148,13 @@ namespace CST_EMI_Shield_Wizard
                 selectedProject.LastModifiedDate = DateTime.Now;
                 ProjectsList.Items.Refresh();
                 ProjectsListView_SelectionChanged(null, null);
+
+                // Имитация загрузки проекта
+                MessageBox.Show($"Проект '{selectedProject.ProjectName}' загружен.", "Загрузка проекта", MessageBoxButton.OK, MessageBoxImage.Information);
+                StatusBarText.Content = $"Проект '{selectedProject.ProjectName}' загружен в {DateTime.Now:HH:mm:ss}";
+
+                // Открываем вкладки "Экран" и "Воздействие"
+                ShowTabs(ShieldTab, ImpactTab);
             }
         }
 
@@ -86,10 +162,22 @@ namespace CST_EMI_Shield_Wizard
         {
             if (ProjectsList.SelectedItem is Project selectedProject)
             {
-                selectedProject.ProjectName = "Renamed Project";
-                selectedProject.LastModifiedDate = DateTime.Now;
-                ProjectsList.Items.Refresh();
-                ProjectsListView_SelectionChanged(null, null);
+                var renameProjectWindow = new RenameProjectWindow(selectedProject.ProjectName);
+                if (renameProjectWindow.ShowDialog() == true)
+                {
+                    string newProjectName = renameProjectWindow.NewProjectName;
+                    if (Projects.Any(p => p.ProjectName == newProjectName))
+                    {
+                        MessageBox.Show("Проект с таким именем уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
+                    else
+                    {
+                        selectedProject.ProjectName = newProjectName;
+                        selectedProject.LastModifiedDate = DateTime.Now;
+                        ProjectsList.Items.Refresh();
+                        ProjectsListView_SelectionChanged(null, null);
+                    }
+                }
             }
         }
 
@@ -97,28 +185,43 @@ namespace CST_EMI_Shield_Wizard
         {
             if (ProjectsList.SelectedItem is Project selectedProject)
             {
-                Projects.Remove(selectedProject);
-                ProjectNameTextBox.Clear();
-                CreationDateTextBox.Clear();
-                ChangeDateTextBox.Clear();
+                var result = MessageBox.Show($"Вы уверены, что хотите удалить проект '{selectedProject.ProjectName}'?",
+                                             "Подтверждение удаления",
+                                             MessageBoxButton.YesNo,
+                                             MessageBoxImage.Question);
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Projects.Remove(selectedProject);
+                    ClearProjectInfo();
+                    SetProjectControlsState(false);
+                }
             }
+        }
+
+        private void ClearProjectInfo()
+        {
+            ProjectNameTextBox.Clear();
+            CreationDateTextBox.Clear();
+            ChangeDateTextBox.Clear();
+        }
+
+        private void SetProjectControlsState(bool isEnabled)
+        {
+            ChangeProjectButton.IsEnabled = isEnabled;
+            RenameProjectButton.IsEnabled = isEnabled;
+            DeleteProjectButton.IsEnabled = isEnabled;
+        }
+
+        private void UpdateProjectControlsState()
+        {
+            SetProjectControlsState(ProjectsList.SelectedItem != null);
         }
 
         private void InitSimulation_Click(object sender, RoutedEventArgs e)
         {
-            UpdateTextBoxesWithRandomValues();
-        }
-
-        private void UpdateTextBoxesWithRandomValues()
-        {
-            TopAmplitudeTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
-            TopHTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
-            TopETextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
-        }
-
-        private double GenerateRandomValue(double min, double max)
-        {
-            return random.NextDouble() * (max - min) + min;
+            ShowTabs(ResultsTab);
+            InterfaceTabs.SelectedItem = ResultsTab; 
         }
 
         private void PopulateMaterialComboBox()
@@ -236,14 +339,6 @@ namespace CST_EMI_Shield_Wizard
             feedbackWindow.ShowDialog();
         }
 
-        private void CreateProject_Click(object sender, RoutedEventArgs e)
-        {
-            //ProjectCreator projectCreator = new ProjectCreator();
-            //if (projectCreator.ShowDialog() == true)
-            //{
-            //    MessageBox.Show("Project creation dialog finished successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            //}
-        }
         private void FullScreen_Click(object sender, RoutedEventArgs e)
         {
             if (WindowState != WindowState.Maximized)
@@ -302,8 +397,8 @@ namespace CST_EMI_Shield_Wizard
 
         private void CompareWithAbcent_Click(object sender, RoutedEventArgs e)
         {
-            ShieldEfficacyHWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
-            ShieldEfficacyEWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+            //ShieldEfficacyHWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+            //ShieldEfficacyEWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
         }
     }
     public class LayerData
