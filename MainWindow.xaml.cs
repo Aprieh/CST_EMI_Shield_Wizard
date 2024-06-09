@@ -56,32 +56,20 @@ namespace CST_EMI_Shield_Wizard
             if (ProjectsList.SelectedItem is Project selectedProject)
             {
                 ProjectNameTextBox.Text = selectedProject.ProjectName;
-                CreationDateTextBox.Text = selectedProject.CreationDate.ToString("dd.MM.yyyy HH:mm");
-                ChangeDateTextBox.Text = selectedProject.LastModifiedDate.ToString("dd.MM.yyyy HH:mm");
+                CreationDateTextBox.Text = selectedProject.CreationDate.ToString("dd.MM.yyyy");
+                ChangeDateTextBox.Text = selectedProject.LastModifiedDate.ToString("dd.MM.yyyy");
             }
         }
 
         private void CreateProjectButton_Click(object sender, RoutedEventArgs e)
         {
-            var createProjectWindow = new CreateProjectWindow();
-            if (createProjectWindow.ShowDialog() == true)
+            var newProject = new Project
             {
-                string newProjectName = createProjectWindow.ProjectName;
-                if (Projects.Any(p => p.ProjectName == newProjectName))
-                {
-                    MessageBox.Show("Проект с таким именем уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
-                    var newProject = new Project
-                    {
-                        ProjectName = newProjectName,
-                        CreationDate = DateTime.Now,
-                        LastModifiedDate = DateTime.Now
-                    };
-                    Projects.Add(newProject);
-                }
-            }
+                ProjectName = "New Project",
+                CreationDate = DateTime.Now,
+                LastModifiedDate = DateTime.Now
+            };
+            Projects.Add(newProject);
         }
 
         private void ChangeProjectButton_Click(object sender, RoutedEventArgs e)
@@ -98,7 +86,6 @@ namespace CST_EMI_Shield_Wizard
         {
             if (ProjectsList.SelectedItem is Project selectedProject)
             {
-                //метод пока пустышка
                 selectedProject.ProjectName = "Renamed Project";
                 selectedProject.LastModifiedDate = DateTime.Now;
                 ProjectsList.Items.Refresh();
@@ -197,52 +184,24 @@ namespace CST_EMI_Shield_Wizard
 
         private void AddLayerButton_Click(object sender, RoutedEventArgs e)
         {
-            try
+            string layerName = layerNameTextBox.Text;
+            string material = materialComboBox.SelectedItem as string;
+
+            double minX = Convert.ToDouble(xMinTextBox.Text);
+            double minY = Convert.ToDouble(yMinTextBox.Text);
+            double minZ = Convert.ToDouble(zMinTextBox.Text);
+            double maxX = Convert.ToDouble(xMaxTextBox.Text);
+            double maxY = Convert.ToDouble(yMaxTextBox.Text);
+            double maxZ = Convert.ToDouble(zMaxTextBox.Text);
+
+            var layers = layerDataGrid.ItemsSource as ObservableCollection<LayerData>;
+            layers.Add(new LayerData
             {
-                string layerName = layerNameTextBox.Text;
-                if (string.IsNullOrWhiteSpace(layerName))
-                {
-                    MessageBox.Show("Имя слоя не может быть пустым.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                string material = materialComboBox.SelectedItem as string;
-                if (material == null)
-                {
-                    MessageBox.Show("Выберите материал.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                if (!double.TryParse(xMinTextBox.Text, out double minX) ||
-                    !double.TryParse(yMinTextBox.Text, out double minY) ||
-                    !double.TryParse(zMinTextBox.Text, out double minZ) ||
-                    !double.TryParse(xMaxTextBox.Text, out double maxX) ||
-                    !double.TryParse(yMaxTextBox.Text, out double maxY) ||
-                    !double.TryParse(zMaxTextBox.Text, out double maxZ))
-                {
-                    MessageBox.Show("Введите корректные числовые значения для координат.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
-                }
-
-                var layers = layerDataGrid.ItemsSource as ObservableCollection<LayerData>;
-                if (layers == null)
-                {
-                    layers = new ObservableCollection<LayerData>();
-                    layerDataGrid.ItemsSource = layers;
-                }
-
-                layers.Add(new LayerData
-                {
-                    LayerName = layerName,
-                    Material = material,
-                    MinCoordinates = $"[{minX}, {minY}, {minZ}]",
-                    MaxCoordinates = $"[{maxX}, {maxY}, {maxZ}]"
-                });
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+                LayerName = layerName,
+                Material = material,
+                MinCoordinates = $"[{minX}, {minY}, {minZ}]",
+                MaxCoordinates = $"[{maxX}, {maxY}, {maxZ}]"
+            });
         }
 
         private void DeleteSelectedLayerButton_Click(object sender, RoutedEventArgs e)
@@ -279,11 +238,11 @@ namespace CST_EMI_Shield_Wizard
 
         private void CreateProject_Click(object sender, RoutedEventArgs e)
         {
-            ProjectCreator projectCreator = new ProjectCreator();
-            if (projectCreator.ShowDialog() == true)
-            {
-                MessageBox.Show("Project creation dialog finished successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+            //ProjectCreator projectCreator = new ProjectCreator();
+            //if (projectCreator.ShowDialog() == true)
+            //{
+            //    MessageBox.Show("Project creation dialog finished successfully.", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            //}
         }
         private void FullScreen_Click(object sender, RoutedEventArgs e)
         {

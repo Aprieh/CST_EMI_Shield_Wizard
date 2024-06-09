@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CST_EMI_Shield_Wizard"
         mc:Ignorable="d"
-        Title="ПАИМЭК" Height="676" Width="900">
+        Title="ПАИМЭК" Height="680" Width="900">
 
     <DockPanel x:Name="MainDockPanel">
         <Menu x:Name="Menu" DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Создать" Click="CreateProject_Click"/>
+                <MenuItem Header="Создать" />
                 <MenuItem Header="Открыть" />
                 <MenuItem x:Name="SaveMenuItem" Header="Сохранить" />
                 <MenuItem Header="Выход" />
@@ -220,8 +220,8 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="1" Content="X" Margin="5,5,5,5"/>
-                                <Label Grid.Row="0" Grid.Column="2" Content="Y" Margin="5,5,5,5"/>
+                                <Label Grid.Row="0" Grid.Column="1" Content="X" Margin="2"/>
+                                <Label Grid.Row="0" Grid.Column="2" Content="Y" Margin="2"/>
                                 <Label Grid.Row="0" Grid.Column="3" Content="Z" Margin="5,5,5,5"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Нормаль распространения по X Y Z:" Margin="5,5,5,5"/>
@@ -296,7 +296,7 @@
                         <Button Grid.Row="4" Grid.Column="1" Content="Запустить расчет" x:Name="InitSimulation" Margin="10" Click="InitSimulation_Click" />
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="ResultsTab" Header="Результаты">
+                <TabItem x:Name="ResultsTab" Header="Результаты" VerticalAlignment="Center">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -318,18 +318,18 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopAmplitudeTextBox" Margin="5"  />
+                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopAmplitudeTextBox" Margin="5" VerticalAlignment="Center"  />
                                 <Label Grid.Row="0" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopHTextBox" Margin="5"  />
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopHTextBox" Margin="5" VerticalAlignment="Center"  />
                                 <Label Grid.Row="1" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5"  />
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5" VerticalAlignment="Center"  />
 
-                                <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click"/>
-                                <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" Click="CompareWithAbcent_Click" />
+                                <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click" VerticalAlignment="Center"/>
+                                <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" Click="CompareWithAbcent_Click" VerticalAlignment="Center" />
 
 
                             </Grid>
@@ -350,20 +350,20 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Button Grid.Row="0" Grid.Column="1" Content="Загрузить Экран" x:Name="LoadShield" Margin="5"/>
+                                <Button Grid.Row="0" Grid.Column="1" Content="Загрузить Экран" x:Name="LoadShield" Margin="5" VerticalAlignment="Center"/>
 
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5"  />
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5" VerticalAlignment="Center"  />
                                 <Label Grid.Row="1" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5"  />
+                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5" VerticalAlignment="Center"  />
                                 <Label Grid.Row="2" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5"  />
-                                <Button Grid.Row="5" Grid.Column="1" Content="Сравнение эффективности экранирования" x:Name="CompareWithCalculated" Margin="5"/>
+                                <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5" VerticalAlignment="Center"  />
+                                <Button Grid.Row="5" Grid.Column="1" Content="Сравнение эффективности экранирования" x:Name="CompareWithCalculated" Margin="5" VerticalAlignment="Center"/>
                             </Grid>
                         </GroupBox>
                         <GroupBox Grid.Row="2" Header="Эффективность экранирования">
@@ -384,9 +384,9 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <Label Content="S(H) (исследуемого экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
-                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyHWithoutTextBox" Margin="0,5"  />
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyHWithoutTextBox" Margin="0,5" VerticalAlignment="Center"  />
                                         <Label Content="S(E) (исследуемого экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5" Grid.Row="1"/>
-                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyEWithoutTextBox" Margin="0,5"   Grid.Row="1"/>
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyEWithoutTextBox" Margin="0,5"   Grid.Row="1" VerticalAlignment="Center"/>
                                     </Grid>
                                 </GroupBox>
                                 <GroupBox Header ="Сравенение - с другим экраном" Grid.Column="1">
@@ -401,9 +401,9 @@
                                             <RowDefinition/>
                                         </Grid.RowDefinitions>
                                         <Label Content="S(H) (исследуемого экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5"/>
-                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyHAnotherTextBox" Margin="0,5"  />
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyHAnotherTextBox" Margin="0,5" VerticalAlignment="Center"  />
                                         <Label Content="S(E) (исследуемого экрана) = " FontFamily="Cambria Math" FontSize="16" Margin="0,5" Grid.Row="1"/>
-                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyEAnotherTextBox" Margin="0,5"   Grid.Row="1"/>
+                                        <TextBox Grid.Column="1" x:Name="ShieldEfficacyEAnotherTextBox" Margin="0,5"   Grid.Row="1" VerticalAlignment="Center"/>
                                     </Grid>
                                 </GroupBox>
                             </Grid>
