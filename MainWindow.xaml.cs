@@ -8,7 +8,7 @@ using System.Windows.Media;
 
 namespace CST_EMI_Shield_Wizard
 {
-    
+
     public partial class MainWindow : Window
     {
         public ObservableCollection<Project> Projects { get; set; }
@@ -413,19 +413,109 @@ namespace CST_EMI_Shield_Wizard
             graphView.Show();
         }
 
-        private void ShowGraphOfTheLoaded_Click(object sender, RoutedEventArgs e)
-        {
-            string eGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranE.txt");
-            string hGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranH.txt");
-            var graphView = new GraphView();
-            graphView.LoadData(eGraph, hGraph);
-            graphView.Show();
-        }
+        //private void ShowGraphOfTheLoaded_Click(object sender, RoutedEventArgs e)
+        //{
+        //    string eGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranE.txt");
+        //    string hGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranH.txt");
+        //    var graphView = new GraphView();
+        //    graphView.LoadData(eGraph, hGraph);
+        //    graphView.Show();
+        //}
 
         private void CompareWithAbcent_Click(object sender, RoutedEventArgs e)
         {
-            //ShieldEfficacyHWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
-            //ShieldEfficacyEWithoutTextBox.Text = GenerateRandomValue(0, 1).ToString("F2");
+            string magneticFilePathManyLayer = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerH.txt");
+            string magneticFilePathBesEkrana = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "BesEkranaH.txt");
+
+            string electricFilePathManyLayer = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerE.txt");
+            string electricFilePathBesEkrana = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "BesEkranaE.txt");
+
+            try
+            {
+                var magneticDataManyLayer = new DataParser();
+                magneticDataManyLayer.Parse(magneticFilePathManyLayer);
+                double maxMagneticAmplitudeManyLayer = magneticDataManyLayer.GetMaxAmplitude();
+
+                var magneticDataBesEkrana = new DataParser();
+                magneticDataBesEkrana.Parse(magneticFilePathBesEkrana);
+                double maxMagneticAmplitudeBesEkrana = magneticDataBesEkrana.GetMaxAmplitude();
+
+                var electricDataManyLayer = new DataParser();
+                electricDataManyLayer.Parse(electricFilePathManyLayer);
+                double maxElectricAmplitudeManyLayer = electricDataManyLayer.GetMaxAmplitude();
+
+                var electricDataBesEkrana = new DataParser();
+                electricDataBesEkrana.Parse(electricFilePathBesEkrana);
+                double maxElectricAmplitudeBesEkrana = electricDataBesEkrana.GetMaxAmplitude();
+
+                // Вычисление эффективности экранирования
+                double seMagnetic = 20 * Math.Log10(maxMagneticAmplitudeBesEkrana / maxMagneticAmplitudeManyLayer);
+                double seElectric = 20 * Math.Log10(maxElectricAmplitudeBesEkrana / maxElectricAmplitudeManyLayer);
+
+                // Отображение результатов в текстовых полях
+                ShieldEfficacyHWithoutTextBox.Text = seMagnetic.ToString("F10");
+                ShieldEfficacyEWithoutTextBox.Text = seElectric.ToString("F10");
+
+                // Отображение максимальных значений амплитуды
+                TopHTextBox.Text = maxMagneticAmplitudeManyLayer.ToString("F10");
+                TopETextBox.Text = maxElectricAmplitudeManyLayer.ToString("F10");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при анализе данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void CompareWithCalculated_Click(object sender, RoutedEventArgs e)
+        {
+            string magneticFilePathManyLayer = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerH.txt");
+            string magneticFilePathSimpleShield = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranH.txt");
+
+            string electricFilePathManyLayer = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerE.txt");
+            string electricFilePathSimpleShield = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranE.txt");
+
+            try
+            {
+                var magneticDataManyLayer = new DataParser();
+                magneticDataManyLayer.Parse(magneticFilePathManyLayer);
+                double maxMagneticAmplitudeManyLayer = magneticDataManyLayer.GetMaxAmplitude();
+
+                var magneticDataSimpleShield = new DataParser();
+                magneticDataSimpleShield.Parse(magneticFilePathSimpleShield);
+                double maxMagneticAmplitudeSimpleShield = magneticDataSimpleShield.GetMaxAmplitude();
+
+                var electricDataManyLayer = new DataParser();
+                electricDataManyLayer.Parse(electricFilePathManyLayer);
+                double maxElectricAmplitudeManyLayer = electricDataManyLayer.GetMaxAmplitude();
+
+                var electricDataSimpleShield = new DataParser();
+                electricDataSimpleShield.Parse(electricFilePathSimpleShield);
+                double maxElectricAmplitudeSimpleShield = electricDataSimpleShield.GetMaxAmplitude();
+
+                // Вычисление эффективности экранирования
+                double seMagnetic = 20 * Math.Log10(maxMagneticAmplitudeSimpleShield / maxMagneticAmplitudeManyLayer);
+                double seElectric = 20 * Math.Log10(maxElectricAmplitudeSimpleShield / maxElectricAmplitudeManyLayer);
+
+                // Отображение результатов в текстовых полях
+                ShieldEfficacyHAnotherTextBox.Text = seMagnetic.ToString("F10");
+                ShieldEfficacyEAnotherTextBox.Text = seElectric.ToString("F10");
+
+                // Отображение максимальных значений амплитуды
+                TopHExTextBox.Text = maxMagneticAmplitudeSimpleShield.ToString("F10");
+                TopEExTextBox.Text = maxElectricAmplitudeSimpleShield.ToString("F10");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при анализе данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void LoadShield_Click(object sender, RoutedEventArgs e)
+        {
+            var ShieldSelection = new ProjectManagerWindow(Projects);
+            ShieldSelection.ShowDialog();
         }
     }
     public class LayerData

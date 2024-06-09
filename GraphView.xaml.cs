@@ -10,6 +10,7 @@ using System.Globalization;
 
 namespace CST_EMI_Shield_Wizard
 {
+
     public class DataParser
     {
         public string Title { get; private set; }
@@ -20,6 +21,19 @@ namespace CST_EMI_Shield_Wizard
         public DataParser()
         {
             DataPoints = new List<DataPoint>();
+        }
+
+        public double GetMaxAmplitude()
+        {
+            double maxAmplitude = 0;
+            foreach (var point in DataPoints)
+            {
+                if (point.Y > maxAmplitude)
+                {
+                    maxAmplitude = point.Y;
+                }
+            }
+            return maxAmplitude;
         }
 
         public void Parse(string filePath)

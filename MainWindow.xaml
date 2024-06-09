@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Мастер экранов" Height="680" Width="900" Icon="/icon.png" >
 
-    
     <DockPanel x:Name="MainDockPanel">
         <Menu x:Name="Menu" DockPanel.Dock="Top">
             <MenuItem Header="Файл">
@@ -351,7 +350,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Button Grid.Row="0" Grid.Column="1" Content="Загрузить Экран" x:Name="LoadShield" Margin="5" VerticalAlignment="Center"/>
+                                <Button Grid.Row="0" Grid.Column="1" Content="Загрузить Экран" x:Name="LoadShield" Margin="5" VerticalAlignment="Center" Click="LoadShield_Click"/>
 
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
@@ -364,7 +363,7 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5" VerticalAlignment="Center"  />
-                                <Button Grid.Row="5" Grid.Column="1" Content="Сравнение эффективности экранирования" x:Name="CompareWithCalculated" Margin="5" VerticalAlignment="Center"/>
+                                <Button Grid.Row="5" Grid.Column="1" Content="Сравнение эффективности экранирования" x:Name="CompareWithCalculated" Margin="5" VerticalAlignment="Center" Click="CompareWithCalculated_Click"/>
                             </Grid>
                         </GroupBox>
                         <GroupBox Grid.Row="2" Header="Эффективность экранирования">
