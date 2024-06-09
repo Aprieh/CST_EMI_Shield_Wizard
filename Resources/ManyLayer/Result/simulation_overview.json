@@ -1,5 +1,5 @@
 {
-    "date": "2024-06-09, 5:18:55 AM, RTZ 2 (????)",
+    "date": "2024-06-09, 8:11:24 PM, RTZ 2 (????)",
     "solver_runs_and_tasks": {
         "module_name": "standard simulation project",
         "solver_run": {
@@ -31,16 +31,16 @@
                 "num_cpu_sockets": 1,
                 "num_dc_nodes": 0,
                 "num_gpus": 0,
-                "num_threads_or_physical_cores": 2
+                "num_threads_or_physical_cores": 6
             },
             "solver_used": "HF Time Domain (Hex)",
             "task_name": "solver run",
             "time_info": {
                 "details": {
-                    "discretizer": 18,
-                    "solver": 7
+                    "discretizer": 5,
+                    "solver": 2
                 },
-                "run_time": 27
+                "run_time": 12
             }
         }
     },

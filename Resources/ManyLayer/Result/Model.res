@@ -133,6 +133,116 @@ result=s:0
 treepath=s:Excitation Signals\default
 files=s:signal_default.sig
 
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Polyimide (lossy)\Dispersive\Eps' (Fit)
+files=s:Polyimide (lossy)_eps_re.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Polyimide (lossy)\Dispersive\Eps'' (Fit)
+files=s:Polyimide (lossy)_eps_im.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Polyimide (lossy)\Dispersive\Eps TangD (Fit)
+files=s:Polyimide (lossy)_eps_tgd.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Copper (pure)\Surface Impedance\Z' (Fit)
+files=s:Copper (pure)_Z_re.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Copper (pure)\Surface Impedance\Z'' (Fit)
+files=s:Copper (pure)_Z_im.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Copper (pure)\Surface Impedance\Z' (Theory)
+files=s:Copper (pure)_Z_datalist_re.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Copper (pure)\Surface Impedance\Z'' (Theory)
+files=s:Copper (pure)_Z_datalist_im.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Nickel\Surface Impedance\Z' (Fit)
+files=s:Nickel_Z_re.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Nickel\Surface Impedance\Z'' (Fit)
+files=s:Nickel_Z_im.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Nickel\Surface Impedance\Z' (Theory)
+files=s:Nickel_Z_datalist_re.sig
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:persistent
+result=s:0
+treepath=s:1D Results\Materials\Nickel\Surface Impedance\Z'' (Theory)
+files=s:Nickel_Z_datalist_im.sig
+
 type=s:MESH_FEEDBACK
 problemclass=s::8:1000
 visibility=s:visible
@@ -311,114 +421,4 @@ lifetime=s:rebuild
 result=s:1
 treepath=s:1D Results\AutomaticRunInformation
 files=s:AutomaticRunInformation
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Polyimide (lossy)\Dispersive\Eps' (Fit)
-files=s:Polyimide (lossy)_eps_re.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Polyimide (lossy)\Dispersive\Eps'' (Fit)
-files=s:Polyimide (lossy)_eps_im.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Polyimide (lossy)\Dispersive\Eps TangD (Fit)
-files=s:Polyimide (lossy)_eps_tgd.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Copper (pure)\Surface Impedance\Z' (Fit)
-files=s:Copper (pure)_Z_re.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Copper (pure)\Surface Impedance\Z'' (Fit)
-files=s:Copper (pure)_Z_im.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Copper (pure)\Surface Impedance\Z' (Theory)
-files=s:Copper (pure)_Z_datalist_re.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Copper (pure)\Surface Impedance\Z'' (Theory)
-files=s:Copper (pure)_Z_datalist_im.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Nickel\Surface Impedance\Z' (Fit)
-files=s:Nickel_Z_re.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Nickel\Surface Impedance\Z'' (Fit)
-files=s:Nickel_Z_im.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Nickel\Surface Impedance\Z' (Theory)
-files=s:Nickel_Z_datalist_re.sig
-
-type=s:XYSIGNAL
-subtype=s:user
-problemclass=s::8:1000
-visibility=s:visible
-creation=s:internal
-lifetime=s:persistent
-result=s:0
-treepath=s:1D Results\Materials\Nickel\Surface Impedance\Z'' (Theory)
-files=s:Nickel_Z_datalist_im.sig
 

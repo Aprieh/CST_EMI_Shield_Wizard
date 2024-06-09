@@ -23,9 +23,7 @@ false
 [start]command
 [end]command
 [start]content
-
 Solid.Delete "component1:solid1"
-
 [end]content
 [start]recover_picks
 1
