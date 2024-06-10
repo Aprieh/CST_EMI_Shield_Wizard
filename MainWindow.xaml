@@ -30,10 +30,6 @@
 
             </MenuItem>
         </Menu>
-
-        <StatusBar x:Name="StatusBar" DockPanel.Dock="Bottom">
-            <StatusBarItem x:Name ="StatusBarText" Content="Готово"/>
-        </StatusBar>
         <Grid x:Name="GridForPanels" >
             <TabControl x:Name="InterfaceTabs">
                 <TabItem x:Name="ProjectTab" Header ="Проекты">

@@ -123,7 +123,7 @@ namespace CST_EMI_Shield_Wizard
                     };
                     Projects.Add(newProject);
 
-                    StatusBarText.Content = $"Проект '{newProjectName}' загружен";
+                    //StatusBarText.Content = $"Проект '{newProjectName}' загружен";
                     ShowTabs(ShieldTab, ImpactTab);
                 }
             }
@@ -145,7 +145,7 @@ namespace CST_EMI_Shield_Wizard
 
                 // Имитация загрузки проекта
                 MessageBox.Show($"Проект '{selectedProject.ProjectName}' загружен.", "Загрузка проекта", MessageBoxButton.OK, MessageBoxImage.Information);
-                StatusBarText.Content = $"Проект '{selectedProject.ProjectName}' загружен в {DateTime.Now:HH:mm:ss}";
+                //StatusBarText.Content = $"Проект '{selectedProject.ProjectName}' загружен в {DateTime.Now:HH:mm:ss}";
 
                 // Открываем вкладки "Экран" и "Воздействие"
                 ShowTabs(ShieldTab, ImpactTab);
