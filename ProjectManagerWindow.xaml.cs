@@ -46,81 +46,17 @@ namespace CST_EMI_Shield_Wizard
             }
         }
 
-        private void CreateProjectButton_Click(object sender, RoutedEventArgs e)
+        private void SelectButton_Click(object sender, RoutedEventArgs e)
         {
-            var createProjectWindow = new CreateProjectWindow();
-            if (createProjectWindow.ShowDialog() == true)
-            {
-                string newProjectName = createProjectWindow.ProjectName;
-                if (Projects.Any(p => p.ProjectName == newProjectName))
-                {
-                    MessageBox.Show("Проект с таким именем уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
-                    var newProject = new Project
-                    {
-                        ProjectName = newProjectName,
-                        CreationDate = DateTime.Now,
-                        LastModifiedDate = DateTime.Now
-                    };
-                    Projects.Add(newProject);
-                }
-            }
+            DialogResult = true;
+            var answer = MessageBox.Show($"Проект \"{SelectedProject.ProjectName}\" выбран", "Выбор проекта", MessageBoxButton.OK);
+            Close();
         }
 
-        private void ChangeProjectButton_Click(object sender, RoutedEventArgs e)
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ProjectsList.SelectedItem is Project selectedProject)
-            {
-                selectedProject.LastModifiedDate = DateTime.Now;
-                ProjectsList.Items.Refresh();
-                ProjectsListView_SelectionChanged(null, null);
-
-                // Имитация загрузки проекта
-                MessageBox.Show($"Проект '{selectedProject.ProjectName}' загружен.", "Загрузка проекта", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-        }
-
-        private void RenameProjectButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (ProjectsList.SelectedItem is Project selectedProject)
-            {
-                var renameProjectWindow = new RenameProjectWindow(selectedProject.ProjectName);
-                if (renameProjectWindow.ShowDialog() == true)
-                {
-                    string newProjectName = renameProjectWindow.NewProjectName;
-                    if (Projects.Any(p => p.ProjectName == newProjectName))
-                    {
-                        MessageBox.Show("Проект с таким именем уже существует.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                    else
-                    {
-                        selectedProject.ProjectName = newProjectName;
-                        selectedProject.LastModifiedDate = DateTime.Now;
-                        ProjectsList.Items.Refresh();
-                        ProjectsListView_SelectionChanged(null, null);
-                    }
-                }
-            }
-        }
-
-        private void DeleteProjectButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (ProjectsList.SelectedItem is Project selectedProject)
-            {
-                var result = MessageBox.Show($"Вы уверены, что хотите удалить проект '{selectedProject.ProjectName}'?",
-                                             "Подтверждение удаления",
-                                             MessageBoxButton.YesNo,
-                                             MessageBoxImage.Question);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    Projects.Remove(selectedProject);
-                    ClearProjectInfo();
-                    SetProjectControlsState(false);
-                }
-            }
+            DialogResult = false;
+            Close();
         }
 
         private void ClearProjectInfo()
@@ -132,9 +68,8 @@ namespace CST_EMI_Shield_Wizard
 
         private void SetProjectControlsState(bool isEnabled)
         {
-            //ChangeProjectButton.IsEnabled = isEnabled;
-            //RenameProjectButton.IsEnabled = isEnabled;
-            //DeleteProjectButton.IsEnabled = isEnabled;
+            SelectSheild.IsEnabled = isEnabled;
+            
         }
     }
 }

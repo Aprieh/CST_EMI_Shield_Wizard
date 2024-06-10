@@ -504,8 +504,11 @@ namespace CST_EMI_Shield_Wizard
         }
         private void LoadShield_Click(object sender, RoutedEventArgs e)
         {
-            var ShieldSelection = new ProjectManagerWindow(Projects);
-            ShieldSelection.ShowDialog();
+            var shieldSelectionWindow = new ProjectManagerWindow(Projects);
+            if (shieldSelectionWindow.ShowDialog() == true)
+            {
+                
+            }
         }
     }
 }

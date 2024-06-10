@@ -47,8 +47,8 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="SelectSheild" Content="Выбрать экран" Margin="5" Grid.Column="0" Click="CreateProjectButton_Click"/>
-                <Button x:Name="CancelSelection" Content="Отмена" Margin="5"  Grid.Column="1" Click="ChangeProjectButton_Click"/>
+                <Button x:Name="SelectSheild" Content="Выбрать экран" Margin="5" Grid.Column="0" Click="SelectButton_Click"/>
+                <Button x:Name="CancelSelection" Content="Отмена" Margin="5"  Grid.Column="1" Click="CancelButton_Click"/>
             </Grid>
         </StackPanel>
     </Grid>
