@@ -413,15 +413,6 @@ namespace CST_EMI_Shield_Wizard
             graphView.Show();
         }
 
-        //private void ShowGraphOfTheLoaded_Click(object sender, RoutedEventArgs e)
-        //{
-        //    string eGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranE.txt");
-        //    string hGraph = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranH.txt");
-        //    var graphView = new GraphView();
-        //    graphView.LoadData(eGraph, hGraph);
-        //    graphView.Show();
-        //}
-
         private void CompareWithAbcent_Click(object sender, RoutedEventArgs e)
         {
             string magneticFilePathManyLayer = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerH.txt");
@@ -517,12 +508,5 @@ namespace CST_EMI_Shield_Wizard
             var ShieldSelection = new ProjectManagerWindow(Projects);
             ShieldSelection.ShowDialog();
         }
-    }
-    public class LayerData
-    {
-        public string LayerName { get; set; }
-        public string Material { get; set; }
-        public string MinCoordinates { get; set; }
-        public string MaxCoordinates { get; set; }
     }
 }

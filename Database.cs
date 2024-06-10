@@ -12,4 +12,11 @@ namespace CST_EMI_Shield_Wizard
         public DateTime CreationDate { get; set; }
         public DateTime LastModifiedDate { get; set; }
     }
+    public class LayerData
+    {
+        public string LayerName { get; set; }
+        public string Material { get; set; }
+        public string MinCoordinates { get; set; }
+        public string MaxCoordinates { get; set; }
+    }
 }
