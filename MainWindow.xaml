@@ -315,21 +315,19 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
-                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopAmplitudeTextBox" Margin="5" VerticalAlignment="Center"  />
                                 <Label Grid.Row="0" Grid.Column="2" Content="А/м" Margin="5"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopHTextBox" Margin="5" VerticalAlignment="Center"  />
+                                <Label Grid.Row="0" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
+                                <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopHTextBox" Margin="5" VerticalAlignment="Center"  />
                                 <Label Grid.Row="1" Grid.Column="2" Content="В/м" Margin="5"/>
 
-                                <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
-                                <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopETextBox" Margin="5" VerticalAlignment="Center"  />
+                                <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
+                                <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopETextBox" Margin="5" VerticalAlignment="Center"  />
 
-                                <Button Grid.Row="3" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click" VerticalAlignment="Center"/>
-                                <Button Grid.Row="4" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" Click="CompareWithAbcent_Click" VerticalAlignment="Center" />
+                                <Button Grid.Row="2" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click" VerticalAlignment="Center"/>
+                                <Button Grid.Row="3" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" Click="CompareWithAbcent_Click" VerticalAlignment="Center" />
 
 
                             </Grid>
@@ -350,16 +348,17 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
-                                <Button Grid.Row="0" Grid.Column="1" Content="Загрузить Экран" x:Name="LoadShield" Margin="5" VerticalAlignment="Center" Click="LoadShield_Click"/>
+                                <Button Grid.Row="0" Grid.Column="0" Content="Загрузить Экран" x:Name="LoadShield" Margin="5" VerticalAlignment="Center" Click="LoadShield_Click"/>
 
+                                <Label Grid.Row="1" Grid.Column="2" Content="В" Margin="5"/>
 
-                                <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель амплитуды:" Margin="5"/>
+                                <Label Grid.Row="1" Grid.Column="0" Content="Амплитуда воздействующей волны:" Margin="5"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5" VerticalAlignment="Center"  />
-                                <Label Grid.Row="1" Grid.Column="2" Content="А/м" Margin="5"/>
+                                <Label Grid.Row="2" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5" VerticalAlignment="Center"  />
-                                <Label Grid.Row="2" Grid.Column="2" Content="В/м" Margin="5"/>
+                                <Label Grid.Row="3" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5" VerticalAlignment="Center"  />

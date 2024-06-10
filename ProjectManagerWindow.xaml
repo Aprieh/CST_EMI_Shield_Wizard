@@ -5,11 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CST_EMI_Shield_Wizard"
         mc:Ignorable="d"
-         Title="Управление проектами" Height="450" Width="800">
+         Title="Выбор проекта для сравнения" Height="300" Width="600">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ListView x:Name="ProjectsList" SelectionChanged="ProjectsListView_SelectionChanged">
             <ListView.View>
@@ -43,19 +43,12 @@
                 <TextBox x:Name="ChangeDateTextBox" Grid.Row="1" Grid.Column="1" Margin="5" IsReadOnly="True" BorderBrush="{x:Null}" />
             </Grid>
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="CreateProjectButton" Content="Создать проект" Margin="5" Grid.Column="0" Click="CreateProjectButton_Click"/>
-                <Button x:Name="ChangeProjectButton" Content="Редактировать проект" Margin="5"  Grid.Column="1" Click="ChangeProjectButton_Click"/>
-                <Button x:Name="RenameProjectButton" Grid.Column="2" Content="Переименовать проект" Margin="5" Click="RenameProjectButton_Click"/>
-                <Button x:Name="DeleteProjectButton" Grid.Column="2" Grid.Row ="1" Content="Удалить" Margin="5" Click="DeleteProjectButton_Click"/>
+                <Button x:Name="SelectSheild" Content="Выбрать экран" Margin="5" Grid.Column="0" Click="CreateProjectButton_Click"/>
+                <Button x:Name="CancelSelection" Content="Отмена" Margin="5"  Grid.Column="1" Click="ChangeProjectButton_Click"/>
             </Grid>
         </StackPanel>
     </Grid>

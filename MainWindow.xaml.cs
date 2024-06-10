@@ -502,7 +502,6 @@ namespace CST_EMI_Shield_Wizard
                 MessageBox.Show($"Ошибка при анализе данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
         private void LoadShield_Click(object sender, RoutedEventArgs e)
         {
             var ShieldSelection = new ProjectManagerWindow(Projects);

@@ -132,9 +132,9 @@ namespace CST_EMI_Shield_Wizard
 
         private void SetProjectControlsState(bool isEnabled)
         {
-            ChangeProjectButton.IsEnabled = isEnabled;
-            RenameProjectButton.IsEnabled = isEnabled;
-            DeleteProjectButton.IsEnabled = isEnabled;
+            //ChangeProjectButton.IsEnabled = isEnabled;
+            //RenameProjectButton.IsEnabled = isEnabled;
+            //DeleteProjectButton.IsEnabled = isEnabled;
         }
     }
 }
