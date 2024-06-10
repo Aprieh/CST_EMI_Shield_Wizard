@@ -314,7 +314,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+
 
                                 </Grid.RowDefinitions>
                                 <Label Grid.Row="0" Grid.Column="2" Content="А/м" Margin="5"/>
@@ -327,7 +327,6 @@
                                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopETextBox" Margin="5" VerticalAlignment="Center"  />
 
                                 <Button Grid.Row="2" Grid.Column="1" Content="Отобразить график воздействия помехи" x:Name="ShowGraphOfTheCalculated" Margin="5" Click="ShowGraphOfTheCalculated_Click" VerticalAlignment="Center"/>
-                                <Button Grid.Row="3" Grid.Column="1" Content="Вычисление общей эффективности экранирования" x:Name="CompareWithAbcent" Margin="5" Click="CompareWithAbcent_Click" VerticalAlignment="Center" />
 
 
                             </Grid>
@@ -345,8 +344,8 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
+
+
                                 </Grid.RowDefinitions>
                                 <Button Grid.Row="0" Grid.Column="0" Content="Загрузить Экран" x:Name="LoadShield" Margin="5" VerticalAlignment="Center" Click="LoadShield_Click"/>
 
@@ -362,7 +361,6 @@
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5" VerticalAlignment="Center"  />
-                                <Button Grid.Row="5" Grid.Column="1" Content="Сравнение эффективности экранирования" x:Name="CompareWithCalculated" Margin="5" VerticalAlignment="Center" Click="CompareWithCalculated_Click"/>
                             </Grid>
                         </GroupBox>
                         <GroupBox Grid.Row="2" Header="Эффективность экранирования">

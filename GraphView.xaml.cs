@@ -122,7 +122,7 @@ namespace CST_EMI_Shield_Wizard
             {
                 Title = "Электрическое воздействие",
                 MarkerType = MarkerType.None,
-                Color = OxyColors.Red
+                Color = OxyColors.Green
             };
             ElectricShieldingModel.Series.Add(electricLineSeries);
 

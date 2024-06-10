@@ -71,11 +71,7 @@ namespace CST_EMI_Shield_Wizard
         {
             Projects = new ObservableCollection<Project>
             {
-                new Project { ProjectName = "Project A", CreationDate = new DateTime(2024, 5, 20, 10, 30, 0), LastModifiedDate = new DateTime(2024, 5, 20, 10, 30, 0) },
-                new Project { ProjectName = "Project B", CreationDate = new DateTime(2024, 5, 21, 11, 45, 0), LastModifiedDate = new DateTime(2024, 5, 21, 11, 45, 0) },
-                new Project { ProjectName = "Project C", CreationDate = new DateTime(2024, 5, 22, 14, 0, 0), LastModifiedDate = new DateTime(2024, 5, 22, 14, 0, 0) },
-                new Project { ProjectName = "Project D", CreationDate = new DateTime(2024, 5, 23, 9, 15, 0), LastModifiedDate = new DateTime(2024, 5, 23, 9, 15, 0) },
-                new Project { ProjectName = "Project E", CreationDate = new DateTime(2024, 5, 24, 16, 30, 0), LastModifiedDate = new DateTime(2024, 5, 24, 16, 30, 0) }
+                new Project { ProjectName = "SimpleSchield", CreationDate = new DateTime(2024, 5, 20, 10, 30, 0), LastModifiedDate = new DateTime(2024, 5, 20, 10, 30, 0) },
             };
             ProjectsList.ItemsSource = Projects;
         }
@@ -246,6 +242,7 @@ namespace CST_EMI_Shield_Wizard
 
             ShowTabs(ResultsTab);
             InterfaceTabs.SelectedItem = ResultsTab;
+            CompareWithAbcent();
         }
         private void PopulateMaterialComboBox()
         {
@@ -387,7 +384,6 @@ namespace CST_EMI_Shield_Wizard
         {
             LaunchCST();
         }
-        //доработать
         private void CalculateEMIImpact_Click(object sender, RoutedEventArgs e)
         {
             LaunchCST();
@@ -413,7 +409,39 @@ namespace CST_EMI_Shield_Wizard
             graphView.Show();
         }
 
-        private void CompareWithAbcent_Click(object sender, RoutedEventArgs e)
+        private string FormatAmplitude(double amplitude, string type)
+        {
+            string[] electricUnits = { "В", "мВ", "мкВ", "нВ" };
+            string[] magneticUnits = { "А", "мА", "мкА", "нА" };
+            string[] selectedUnits;
+            double scaledAmplitude = amplitude;
+            int unitIndex = 0;
+
+            if (type == "electric")
+            {
+                selectedUnits = electricUnits;
+            }
+            else if (type == "magnetic")
+            {
+                selectedUnits = magneticUnits;
+            }
+            else
+            {
+                throw new ArgumentException("Unknown type specified. Valid types are 'electric' and 'magnetic'.");
+            }
+
+            
+            while (scaledAmplitude < 1 && unitIndex < selectedUnits.Length - 1)
+            {
+                scaledAmplitude *= 1000;
+                unitIndex++;
+            }
+            return $"{scaledAmplitude:F3} {selectedUnits[unitIndex]}";
+        }
+
+        // Пример использования метода в методах CompareWithAbcent и CompareWithCalculated
+
+        private void CompareWithAbcent()
         {
             string magneticFilePathManyLayer = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerH.txt");
             string magneticFilePathBesEkrana = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "BesEkranaH.txt");
@@ -444,12 +472,12 @@ namespace CST_EMI_Shield_Wizard
                 double seElectric = 20 * Math.Log10(maxElectricAmplitudeBesEkrana / maxElectricAmplitudeManyLayer);
 
                 // Отображение результатов в текстовых полях
-                ShieldEfficacyHWithoutTextBox.Text = seMagnetic.ToString("F10");
-                ShieldEfficacyEWithoutTextBox.Text = seElectric.ToString("F10");
+                ShieldEfficacyHWithoutTextBox.Text = seMagnetic.ToString("F10") + " dB";
+                ShieldEfficacyEWithoutTextBox.Text = seElectric.ToString("F10") + " dB";
 
-                // Отображение максимальных значений амплитуды
-                TopHTextBox.Text = maxMagneticAmplitudeManyLayer.ToString("F10");
-                TopETextBox.Text = maxElectricAmplitudeManyLayer.ToString("F10");
+                // Отображение максимальных значений амплитуды с единицами измерения
+                TopHTextBox.Text = FormatAmplitude(maxMagneticAmplitudeManyLayer, "magnetic");
+                TopETextBox.Text = FormatAmplitude(maxElectricAmplitudeManyLayer, "electric");
 
             }
             catch (Exception ex)
@@ -458,7 +486,7 @@ namespace CST_EMI_Shield_Wizard
             }
         }
 
-        private void CompareWithCalculated_Click(object sender, RoutedEventArgs e)
+        private void CompareWithCalculated()
         {
             string magneticFilePathManyLayer = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "ManyLayerH.txt");
             string magneticFilePathSimpleShield = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "Graphs", "prostEkranH.txt");
@@ -488,14 +516,14 @@ namespace CST_EMI_Shield_Wizard
                 double seMagnetic = 20 * Math.Log10(maxMagneticAmplitudeSimpleShield / maxMagneticAmplitudeManyLayer);
                 double seElectric = 20 * Math.Log10(maxElectricAmplitudeSimpleShield / maxElectricAmplitudeManyLayer);
 
+                TopAmplitudeExTextBox.Text = "100";
                 // Отображение результатов в текстовых полях
-                ShieldEfficacyHAnotherTextBox.Text = seMagnetic.ToString("F10");
-                ShieldEfficacyEAnotherTextBox.Text = seElectric.ToString("F10");
+                ShieldEfficacyHAnotherTextBox.Text = seMagnetic.ToString("F4") + " dB";
+                ShieldEfficacyEAnotherTextBox.Text = seElectric.ToString("F4") + " dB";
 
-                // Отображение максимальных значений амплитуды
-                TopHExTextBox.Text = maxMagneticAmplitudeSimpleShield.ToString("F10");
-                TopEExTextBox.Text = maxElectricAmplitudeSimpleShield.ToString("F10");
-
+                // Отображение максимальных значений амплитуды с единицами измерения
+                TopHExTextBox.Text = FormatAmplitude(maxMagneticAmplitudeSimpleShield, "magnetic");
+                TopEExTextBox.Text = FormatAmplitude(maxElectricAmplitudeSimpleShield, "electric");
             }
             catch (Exception ex)
             {
@@ -507,7 +535,7 @@ namespace CST_EMI_Shield_Wizard
             var shieldSelectionWindow = new ProjectManagerWindow(Projects);
             if (shieldSelectionWindow.ShowDialog() == true)
             {
-                
+                CompareWithCalculated();
             }
         }
     }
