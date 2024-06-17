@@ -472,8 +472,8 @@ namespace CST_EMI_Shield_Wizard
                 double seElectric = 20 * Math.Log10(maxElectricAmplitudeBesEkrana / maxElectricAmplitudeManyLayer);
 
                 // Отображение результатов в текстовых полях
-                ShieldEfficacyHWithoutTextBox.Text = seMagnetic.ToString("F10") + " dB";
-                ShieldEfficacyEWithoutTextBox.Text = seElectric.ToString("F10") + " dB";
+                ShieldEfficacyHWithoutTextBox.Text = seMagnetic.ToString("F10") + " дБ";
+                ShieldEfficacyEWithoutTextBox.Text = seElectric.ToString("F10") + " дБ";
 
                 // Отображение максимальных значений амплитуды с единицами измерения
                 TopHTextBox.Text = FormatAmplitude(maxMagneticAmplitudeManyLayer, "magnetic");
@@ -516,10 +516,10 @@ namespace CST_EMI_Shield_Wizard
                 double seMagnetic = 20 * Math.Log10(maxMagneticAmplitudeSimpleShield / maxMagneticAmplitudeManyLayer);
                 double seElectric = 20 * Math.Log10(maxElectricAmplitudeSimpleShield / maxElectricAmplitudeManyLayer);
 
-                TopAmplitudeExTextBox.Text = "100";
+                TopAmplitudeExTextBox.Text = "100 В";
                 // Отображение результатов в текстовых полях
-                ShieldEfficacyHAnotherTextBox.Text = seMagnetic.ToString("F4") + " dB";
-                ShieldEfficacyEAnotherTextBox.Text = seElectric.ToString("F4") + " dB";
+                ShieldEfficacyHAnotherTextBox.Text = seMagnetic.ToString("F4") + " дБ";
+                ShieldEfficacyEAnotherTextBox.Text = seElectric.ToString("F4") + " дБ";
 
                 // Отображение максимальных значений амплитуды с единицами измерения
                 TopHExTextBox.Text = FormatAmplitude(maxMagneticAmplitudeSimpleShield, "magnetic");
