@@ -235,9 +235,21 @@
                                 <TextBox Grid.Row="3" Grid.Column="3" x:Name="zElectricFieldTextBox" Margin="5,5,5,5" VerticalAlignment="Center" />
                                 <Label Grid.Row="3" Grid.Column="4" Content="В/м" Margin="5,5,5,5"/>
 
-                                <Label Grid.Row="4" Grid.Column="0" Content="Частота плоской волны:" Margin="5,5,5,5" />
-                                <TextBox Grid.Row="4" Grid.Column="1" x:Name="WaveFreqTextBox" Margin="5,5,5,5" Grid.ColumnSpan="2" VerticalAlignment="Center"/>
-                                <Label Grid.Row="4" Grid.Column="3" Content="МГц" Margin="5,5,5,5" />
+                                <Label Grid.Row="4" Grid.Column="0" Content="Диапазон частот плоской волны:" Margin="5,5,5,5" />
+                                <Grid Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="МГц от:" Margin="5,5,5,5" HorizontalAlignment="Right" />
+                                    <Label Content="МГц до:" Margin="5,5,5,5" Grid.Column="2" HorizontalAlignment="Right" />
+                                    <TextBox x:Name="WaveFreqFromTextBox" Margin="5,5,5,5" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <TextBox x:Name="WaveFreqToTextBox" Margin="5,5,5,5" VerticalAlignment="Center" Grid.Column="3"/>
+                                </Grid>
+                                
+                                
                             </Grid>
                         </GroupBox>
 
@@ -313,11 +325,9 @@
 
 
                                 </Grid.RowDefinitions>
-                                <Label Grid.Row="0" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="0" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="0" Grid.Column="1" x:Name="TopHTextBox" Margin="5" VerticalAlignment="Center"  />
-                                <Label Grid.Row="1" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopETextBox" Margin="5" VerticalAlignment="Center"  />
@@ -349,11 +359,9 @@
 
                                 <Label Grid.Row="1" Grid.Column="0" Content="Амплитуда воздействующей волны:" Margin="5"/>
                                 <TextBox Grid.Row="1" Grid.Column="1" x:Name="TopAmplitudeExTextBox" Margin="5" VerticalAlignment="Center"  />
-                                <Label Grid.Row="2" Grid.Column="2" Content="А/м" Margin="5"/>
 
                                 <Label Grid.Row="2" Grid.Column="0" Content="Пиковый показатель H компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="2" Grid.Column="1" x:Name="TopHExTextBox" Margin="5" VerticalAlignment="Center"  />
-                                <Label Grid.Row="3" Grid.Column="2" Content="В/м" Margin="5"/>
 
                                 <Label Grid.Row="3" Grid.Column="0" Content="Пиковый показатель E компоненты помехи:" Margin="5"/>
                                 <TextBox Grid.Row="3" Grid.Column="1" x:Name="TopEExTextBox" Margin="5" VerticalAlignment="Center"  />
