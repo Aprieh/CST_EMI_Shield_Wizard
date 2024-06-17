@@ -200,3 +200,40 @@ End With
 '[VERSION]2024.1|33.0.1|20231016[/VERSION]
 Discretizer.PBAVersion "2023101624"
 
+'@ change solver type
+
+'[VERSION]2024.1|33.0.1|20231016[/VERSION]
+ChangeSolverType "HF Time Domain"
+
+'@ modify probe: 0
+
+'[VERSION]2024.1|33.0.1|20231016[/VERSION]
+With Probe
+     .Reset 
+     .ID "0" 
+     .AutoLabel "True" 
+     .Field "Efield" 
+     .Orientation "All" 
+     .Xpos "25" 
+     .Ypos "-10" 
+     .Zpos "25" 
+     .Create
+End With
+
+'@ modify probe: 1
+
+'[VERSION]2024.1|33.0.1|20231016[/VERSION]
+Probe.DeleteById "1" 
+
+With Probe
+     .Reset 
+     .ID "1" 
+     .AutoLabel "True" 
+     .Field "Hfield" 
+     .Orientation "All" 
+     .Xpos "25" 
+     .Ypos "-10" 
+     .Zpos "25" 
+     .Create
+End With
+

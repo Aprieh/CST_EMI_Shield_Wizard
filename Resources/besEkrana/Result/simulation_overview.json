@@ -1,5 +1,5 @@
 {
-    "date": "2024-06-09, 8:12:21 PM, RTZ 2 (????)",
+    "date": "2024-06-17, 20:11:15, RTZ 2 (зима)",
     "solver_runs_and_tasks": {
         "module_name": "standard simulation project",
         "solver_run": {
@@ -40,7 +40,7 @@
                     "discretizer": 3,
                     "solver": 0
                 },
-                "run_time": 7
+                "run_time": 16
             }
         }
     },

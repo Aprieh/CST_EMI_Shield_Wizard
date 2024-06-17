@@ -39,9 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="AdvancedShield.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Resources\besEkrana.cst">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

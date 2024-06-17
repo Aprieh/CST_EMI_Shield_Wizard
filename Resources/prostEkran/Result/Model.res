@@ -1,5 +1,5 @@
 MWS Result File Version 20150206
-size=i:35
+size=i:47
 
 type=s:HIDDENITEM
 problemclass=s::8:1000
@@ -220,8 +220,8 @@ visibility=s:visible
 creation=s:internal
 lifetime=s:rebuild
 result=s:1
-treepath=s:1D Results\Probes\H-Field\Probe Signals\H-Field (Y; 25 -10 25) [pw]
-files=s:H-Field (Y; 25 -10 25)(pw).prs
+treepath=s:1D Results\Probes\H-Field\Probe Signals\H-Field (25 -10 25)(X) [pw]
+files=s:H-Field (25 -10 25)(X)(pw).prs
 
 type=s:XYSIGNAL
 subtype=s:complex
@@ -230,8 +230,8 @@ visibility=s:visible
 creation=s:internal
 lifetime=s:rebuild
 result=s:1
-treepath=s:1D Results\Probes\H-Field\H-Field (Y; 25 -10 25) [pw]
-files=s:H-Field (Y; 25 -10 25)(pw).prc
+treepath=s:1D Results\Probes\H-Field\H-Field (25 -10 25)(X) [pw]
+files=s:H-Field (25 -10 25)(X)(pw).prc
 
 type=s:XYSIGNAL
 subtype=s:user
@@ -240,8 +240,8 @@ visibility=s:visible
 creation=s:internal
 lifetime=s:rebuild
 result=s:1
-treepath=s:1D Results\Probes\E-Field\Probe Signals\E-Field (Y; 25 -10 25) [pw]
-files=s:E-Field (Y; 25 -10 25)(pw).prs
+treepath=s:1D Results\Probes\H-Field\Probe Signals\H-Field (25 -10 25)(Y) [pw]
+files=s:H-Field (25 -10 25)(Y)(pw).prs
 
 type=s:XYSIGNAL
 subtype=s:complex
@@ -250,8 +250,128 @@ visibility=s:visible
 creation=s:internal
 lifetime=s:rebuild
 result=s:1
-treepath=s:1D Results\Probes\E-Field\E-Field (Y; 25 -10 25) [pw]
-files=s:E-Field (Y; 25 -10 25)(pw).prc
+treepath=s:1D Results\Probes\H-Field\H-Field (25 -10 25)(Y) [pw]
+files=s:H-Field (25 -10 25)(Y)(pw).prc
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\H-Field\Probe Signals\H-Field (25 -10 25)(Z) [pw]
+files=s:H-Field (25 -10 25)(Z)(pw).prs
+
+type=s:XYSIGNAL
+subtype=s:complex
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\H-Field\H-Field (25 -10 25)(Z) [pw]
+files=s:H-Field (25 -10 25)(Z)(pw).prc
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\H-Field\Probe Signals\H-Field (25 -10 25)(Abs) [pw]
+files=s:H-Field (25 -10 25)(Abs)(pw).prs
+
+type=s:XYSIGNAL
+subtype=s:complex
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\H-Field\H-Field (25 -10 25)(Abs) [pw]
+files=s:H-Field (25 -10 25)(Abs)(pw).prc
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\E-Field\Probe Signals\E-Field (25 -10 25)(X) [pw]
+files=s:E-Field (25 -10 25)(X)(pw).prs
+
+type=s:XYSIGNAL
+subtype=s:complex
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\E-Field\E-Field (25 -10 25)(X) [pw]
+files=s:E-Field (25 -10 25)(X)(pw).prc
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\E-Field\Probe Signals\E-Field (25 -10 25)(Y) [pw]
+files=s:E-Field (25 -10 25)(Y)(pw).prs
+
+type=s:XYSIGNAL
+subtype=s:complex
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\E-Field\E-Field (25 -10 25)(Y) [pw]
+files=s:E-Field (25 -10 25)(Y)(pw).prc
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\E-Field\Probe Signals\E-Field (25 -10 25)(Z) [pw]
+files=s:E-Field (25 -10 25)(Z)(pw).prs
+
+type=s:XYSIGNAL
+subtype=s:complex
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\E-Field\E-Field (25 -10 25)(Z) [pw]
+files=s:E-Field (25 -10 25)(Z)(pw).prc
+
+type=s:XYSIGNAL
+subtype=s:user
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\E-Field\Probe Signals\E-Field (25 -10 25)(Abs) [pw]
+files=s:E-Field (25 -10 25)(Abs)(pw).prs
+
+type=s:XYSIGNAL
+subtype=s:complex
+problemclass=s::8:1000
+visibility=s:visible
+creation=s:internal
+lifetime=s:rebuild
+result=s:1
+treepath=s:1D Results\Probes\E-Field\E-Field (25 -10 25)(Abs) [pw]
+files=s:E-Field (25 -10 25)(Abs)(pw).prc
 
 type=s:XYSIGNAL
 subtype=s:complex

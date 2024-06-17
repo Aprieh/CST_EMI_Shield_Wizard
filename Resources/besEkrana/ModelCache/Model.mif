@@ -4,7 +4,7 @@
 [PCB_IMPORT: False]
 [PCB_IMPORT_NEW: False]
 [DISABLE_FAST_LOAD: False]
-[BBOX:-37.474057249999994 87.474057249999987 -37.474057249999994 42.474057249999994 -37.474057249999994 87.474057249999987]
+[BBOX:0 50 -37.474057249999994 42.474057249999994 0 50]
 [BBOX_STRUCTURE:0 50 0 5 0 50]
 [UNITS]
      .SetUnit "Length", "mm"
@@ -32,12 +32,12 @@ Solver.FrequencyRange "1", "3"
      .ApplyInAllDirections "False" 
 [ENDBACKGROUND]
 [BOUNDARY]
-     .Xmin "expanded open"
-     .Xmax "expanded open"
+     .Xmin "open"
+     .Xmax "open"
      .Ymin "expanded open"
      .Ymax "expanded open"
-     .Zmin "expanded open"
-     .Zmax "expanded open"
+     .Zmin "open"
+     .Zmax "open"
      .Xsymmetry "none"
      .Ysymmetry "none"
      .Zsymmetry "none"
@@ -416,26 +416,26 @@ Solver.FrequencyRange "1", "3"
      .Transparency "0" 
      .Create
 [ENDMATERIAL]
-[STANDALONEOBJECT: PROBE|E-Field (Y; 25 -10 25)]
+[STANDALONEOBJECT: PROBE|E-Field (25 -10 25)]
 With Probe
      .Reset 
      .ID "-1" 
      .AutoLabel "True" 
      .Field "Efield" 
-     .Orientation "Y" 
+     .Orientation "All" 
      .Xpos "25" 
      .Ypos "-10" 
      .Zpos "25" 
      .Create
 End With
 [ENDSTANDALONEOBJECT]
-[STANDALONEOBJECT: PROBE|H-Field (Y; 25 -10 25)]
+[STANDALONEOBJECT: PROBE|H-Field (25 -10 25)]
 With Probe
      .Reset 
      .ID "-1" 
      .AutoLabel "True" 
      .Field "Hfield" 
-     .Orientation "Y" 
+     .Orientation "All" 
      .Xpos "25" 
      .Ypos "-10" 
      .Zpos "25" 

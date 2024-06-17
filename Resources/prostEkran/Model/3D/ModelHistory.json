@@ -253,6 +253,55 @@
             "code": [
                 "Discretizer.PBAVersion \"2023101624\""
             ]
+        },
+        {
+            "caption": "change solver type",
+            "version": "2024.1|33.0.1|20231016",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "ChangeSolverType \"HF Time Domain\""
+            ]
+        },
+        {
+            "caption": "modify probe: 0",
+            "version": "2024.1|33.0.1|20231016",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "With Probe",
+                "     .Reset ",
+                "     .ID \"0\" ",
+                "     .AutoLabel \"True\" ",
+                "     .Field \"Efield\" ",
+                "     .Orientation \"All\" ",
+                "     .Xpos \"25\" ",
+                "     .Ypos \"-10\" ",
+                "     .Zpos \"25\" ",
+                "     .Create",
+                "End With"
+            ]
+        },
+        {
+            "caption": "modify probe: 1",
+            "version": "2024.1|33.0.1|20231016",
+            "hidden": false,
+            "type": "vba",
+            "code": [
+                "Probe.DeleteById \"1\" ",
+                "",
+                "With Probe",
+                "     .Reset ",
+                "     .ID \"1\" ",
+                "     .AutoLabel \"True\" ",
+                "     .Field \"Hfield\" ",
+                "     .Orientation \"All\" ",
+                "     .Xpos \"25\" ",
+                "     .Ypos \"-10\" ",
+                "     .Zpos \"25\" ",
+                "     .Create",
+                "End With"
+            ]
         }
     ]
 }

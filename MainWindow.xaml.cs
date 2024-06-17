@@ -411,8 +411,8 @@ namespace CST_EMI_Shield_Wizard
 
         private string FormatAmplitude(double amplitude, string type)
         {
-            string[] electricUnits = { "В", "мВ", "мкВ", "нВ" };
-            string[] magneticUnits = { "А", "мА", "мкА", "нА" };
+            string[] electricUnits = { "В/м", "мВ/м", "мкВ/м", "нВ/м" };
+            string[] magneticUnits = { "А/м", "мА/м", "мкА/м", "нА/м" };
             string[] selectedUnits;
             double scaledAmplitude = amplitude;
             int unitIndex = 0;
